@@ -2,7 +2,6 @@
 #set(MAKE_C_COMPILER "/usr/bin/gcc")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 set(PROJECT_NAME CSP)
-
 project(${PROJECT_NAME})
 ADD_DEFINITIONS(
     -std=c++11 # Or -std=c++0x
@@ -47,4 +46,16 @@ set(TESTS
 
 add_executable(runTests "${TESTS}")
 target_link_libraries(runTests ${PROJECT_NAME})
+##########################################################################
+# Examples
+##########################################################################
+file(GLOB_RECURSE EXAMPLES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp")
 
+
+foreach( example ${EXAMPLES} )
+    # I used a simple string replace, to cut off .cpp.
+    string( REPLACE ".cpp" "" exampleName ${example} )
+    add_executable( ${exampleName} ${example} )
+    # Link
+    target_link_libraries( ${exampleName} ${PROJECT_NAME} )
+endforeach()

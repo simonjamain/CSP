@@ -2,6 +2,7 @@ message(STATUS "Finding Or-tools...")
 
 # After using this module, the following variables will be available:
 #   ORTOOLS_LIBRARY : The gecode libraries that were found.
+#   ORTOOLS_LIBRARY_PATH : The gecode libraries that were found.
 #   ORTOOLS_INCLUDE_DIR : path to the gecode headers.
 
 # Look for the main header files of gecode.
@@ -9,7 +10,7 @@ file(TO_CMAKE_PATH "$ENV{PATH}" envpath)
 #message("env path cmake : ${envpath}")
 
 find_library (ORTOOLS_LIBRARY NAMES ortools PATHS envpath PATH_SUFFIXES "or-tools.MacOsX64/lib/")
-#find_library (ORTOOLS_LIBRARY NAMES ortools PATHS envpath)
+#find_path (ORTOOLS_LIBRARY NAMES  PATHS envpath)
 
 if(NOT ORTOOLS_LIBRARY)
   	message(WARNING "Or-tools library not found!")
@@ -26,7 +27,7 @@ set(OR_TOOLS_TOP ${ORTOOLS_INCLUDE_DIR})# used by or-tools
 if (ORTOOLS_INCLUDE_DIR AND ORTOOLS_LIBRARY)
     set(OrTools_FOUND TRUE)
 else()
-	set(OrTools_FOUND FALSE)
+    set(OrTools_FOUND FALSE)
 endif()
 
 #http://www.cmake.org/Wiki/CMake_Useful_Variables
