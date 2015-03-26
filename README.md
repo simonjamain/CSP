@@ -9,3 +9,4 @@ make third_party;
 make cc;
 # Known bugs
 The linker of produced executables on osx can point to the wrong location : use otool to change it to the good or tool location
+see (http://www.cmake.org/Wiki/CMake_RPATH_handling)
