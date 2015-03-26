@@ -8,7 +8,7 @@ message(STATUS "Finding Or-tools...")
 file(TO_CMAKE_PATH "$ENV{PATH}" envpath)
 #message("env path cmake : ${envpath}")
 
-find_library (ORTOOLS_LIBRARY NAMES ortools PATHS envpath PATH_SUFFIXES "or-tools/lib/")
+find_library (ORTOOLS_LIBRARY NAMES ortools PATHS envpath PATH_SUFFIXES "or-tools.MacOsX64/lib/")
 #find_library (ORTOOLS_LIBRARY NAMES ortools PATHS envpath)
 
 if(NOT ORTOOLS_LIBRARY)
@@ -20,5 +20,14 @@ endif()
 
 
 
-find_path(ORTOOLS_INCLUDE_DIR NAMES constraint_solver PATHS envpath PATH_SUFFIXES "or-tools/src/")
-#message(STATUS "Or-tools include DIR : ${ORTOOLS_INCLUDE_DIR}")
+find_path(ORTOOLS_INCLUDE_DIR NAMES constraint_solver PATHS envpath PATH_SUFFIXES "or-tools.MacOsX64/include/")
+message(STATUS "or-tools path : ${ORTOOLS_INCLUDE_DIR}")
+
+if (ORTOOLS_INCLUDE_DIR AND ORTOOLS_LIBRARY)
+    set(OrTools_FOUND TRUE)
+else()
+	set(OrTools_FOUND FALSE)
+endif()
+
+#http://www.cmake.org/Wiki/CMake_Useful_Variables
+#-DCMAKE_PREFIX_PATH=/Users/doctorant/Desktop/lib

@@ -1,7 +1,9 @@
 #usefull ressources: https://github.com/ggutierrez/gecodert
 #set(MAKE_C_COMPILER "/usr/bin/gcc")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
-project(CSP CXX)
+set(PROJECT_NAME CSP)
+
+project(${PROJECT_NAME})
 ADD_DEFINITIONS(
     -std=c++11 # Or -std=c++0x
     # Other flags
@@ -19,25 +21,26 @@ message(STATUS "compiler : ${CMAKE_CXX_COMPILER}")
 ##########################################################################
 find_package(OrTools REQUIRED)# generate ORTOOLS_INCLUDE_DIR and ORTOOLS_LIBRARY
 include_directories(${ORTOOLS_INCLUDE_DIR})
-message(STATUS "or-tools path : ${ORTOOLS_INCLUDE_DIR}")
+set(OR_TOOLS_TOP ${ORTOOLS_INCLUDE_DIR})# used by or-tools
 ##########################################################################
 # This project products
 ##########################################################################
 include_directories(${CMAKE_SOURCE_DIR})
 
+file(GLOB_RECURSE HDRS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.hpp")
+file(GLOB_RECURSE SRCS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
+
 set(SOURCES
-  source/csp.cc
+	  ${SRCS}
+	  ${HDRS}
   )
 
-#add_library(csp ${SOURCES})
-#target_link_libraries(csp OrTools)
-
-add_executable(example ${SOURCES})
-target_link_libraries(example OrTools)
+add_library(${PROJECT_NAME} ${SOURCES})
+target_link_libraries(${PROJECT_NAME} ${ORTOOLS_LIBRARY})
 ##########################################################################
 # Examples
 ##########################################################################
 
-#add_executable(example test/main.cpp)
-#target_link_libraries(example csp)
+add_executable(example "${CMAKE_CURRENT_SOURCE_DIR}/test/main.cpp")
+target_link_libraries(example ${PROJECT_NAME} ${ORTOOLS_LIBRARY})
 
