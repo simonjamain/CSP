@@ -7,3 +7,5 @@ git clone https://github.com/google/or-tools.git or-tools;
 # Mac Users : Installer cmake dans le repertoire Application (http://www.cmake.org/download/ Binary osx distribution)
 make third_party;
 make cc;
+# Known bugs
+The linker of produced executables on osx can point to the wrong location : use otool to change it to the good or tool location

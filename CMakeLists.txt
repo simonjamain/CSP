@@ -20,11 +20,10 @@ message(STATUS "compiler : ${CMAKE_CXX_COMPILER}")
 # Google or-tools
 ##########################################################################
 find_package(OrTools REQUIRED)# generate ORTOOLS_INCLUDE_DIR and ORTOOLS_LIBRARY
+find_package(Catch REQUIRED)# generate CATCH_INCLUDE_DIR
 ##########################################################################
 # This project products
 ##########################################################################
-include_directories(${CMAKE_SOURCE_DIR})
-
 file(GLOB_RECURSE HDRS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.hpp")
 file(GLOB_RECURSE SRCS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 
@@ -36,9 +35,16 @@ set(SOURCES
 add_library(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${ORTOOLS_LIBRARY})
 ##########################################################################
-# Examples
+# Tests
 ##########################################################################
+file(GLOB_RECURSE TESTS_HDRS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.hpp")
+file(GLOB_RECURSE TESTS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp")
 
-add_executable(example "${CMAKE_CURRENT_SOURCE_DIR}/test/main.cpp")
-target_link_libraries(example ${PROJECT_NAME} ${ORTOOLS_LIBRARY})
+set(TESTS
+          ${TESTS_HDRS}
+          ${TESTS_SRCS}
+  )
+
+add_executable(runTests "${TESTS}")
+target_link_libraries(runTests ${PROJECT_NAME})
 
