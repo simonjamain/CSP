@@ -18,10 +18,10 @@ else()
 endif()
 
 
-
-
 find_path(ORTOOLS_INCLUDE_DIR NAMES constraint_solver PATHS envpath PATH_SUFFIXES "or-tools.MacOsX64/include/")
 message(STATUS "or-tools path : ${ORTOOLS_INCLUDE_DIR}")
+include_directories(${ORTOOLS_INCLUDE_DIR})
+set(OR_TOOLS_TOP ${ORTOOLS_INCLUDE_DIR})# used by or-tools
 
 if (ORTOOLS_INCLUDE_DIR AND ORTOOLS_LIBRARY)
     set(OrTools_FOUND TRUE)

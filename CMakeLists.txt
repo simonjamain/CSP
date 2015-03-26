@@ -20,8 +20,6 @@ message(STATUS "compiler : ${CMAKE_CXX_COMPILER}")
 # Google or-tools
 ##########################################################################
 find_package(OrTools REQUIRED)# generate ORTOOLS_INCLUDE_DIR and ORTOOLS_LIBRARY
-include_directories(${ORTOOLS_INCLUDE_DIR})
-set(OR_TOOLS_TOP ${ORTOOLS_INCLUDE_DIR})# used by or-tools
 ##########################################################################
 # This project products
 ##########################################################################
