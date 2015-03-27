@@ -29,7 +29,7 @@ namespace CSP
 		:_length(value),_finite(true)
 		{};
 
-		Duration(PositiveInfinity value)
+        Duration(PositiveInfinity value)
 		:_length(DEFAULT_VALUE),_finite(false)
 		{};
 
