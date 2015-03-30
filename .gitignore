@@ -6,6 +6,7 @@ lib/
 
 #os specific
 *.autosave
+*.user
 
 #standard c++
 # Compiled Object files
