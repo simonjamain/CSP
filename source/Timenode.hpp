@@ -11,7 +11,7 @@ namespace CSP
         operations_research::IntVar* _date;
     public:
         Timenode()
-            :_date(NULL){};
+            :_date(NULL){}
 
         operations_research::IntVar*
         getDate(operations_research::Solver& solver);

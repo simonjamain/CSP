@@ -10,7 +10,7 @@ namespace CSP
 	private:
 		Duration _duration;
 	public:
-        ~FiniteDuration(){};
+        ~FiniteDuration(){}
         
         FiniteDuration(unsigned int length)
 		:_duration(length)

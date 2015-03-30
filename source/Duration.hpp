@@ -10,8 +10,8 @@ namespace CSP
     class IsInfiniteException
     {
     public:
-        IsInfiniteException(){};
-        ~IsInfiniteException(){};
+        IsInfiniteException(){}
+        ~IsInfiniteException(){}
     };
 
 	class Duration

@@ -11,8 +11,8 @@ namespace CSP
     class InternalPropertiesNotValidException
     {
     public:
-        InternalPropertiesNotValidException(){};
-        ~InternalPropertiesNotValidException(){};
+        InternalPropertiesNotValidException(){}
+        ~InternalPropertiesNotValidException(){}
     };
 
     class Constraint
@@ -26,7 +26,7 @@ namespace CSP
 
     public:
         Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode)
-            :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_prevTimenode(prevTimenode),_nextTimenode(nextTimenode){};
+            :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_prevTimenode(prevTimenode),_nextTimenode(nextTimenode){}
 
         void
         setNominal(FiniteDuration duration);
