@@ -5,46 +5,46 @@
 
 namespace CSP
 {
-	class PositiveInfinity{};
+class PositiveInfinity{};
 
-    class IsInfiniteException
-    {
-    public:
-        IsInfiniteException(){}
-        ~IsInfiniteException(){}
-    };
+class IsInfiniteException
+{
+public:
+    IsInfiniteException(){}
+    ~IsInfiniteException(){}
+};
 
-	class Duration
-	{
-	private:
-        unsigned int
-		_length;
+class Duration
+{
+private:
+    unsigned int
+    _length;
 
-		bool
-		_finite;
-	public:
-        ~Duration(){}
+    bool
+    _finite;
+public:
+    ~Duration(){}
 
-        Duration(unsigned int value)
-		:_length(value),_finite(true)
-        {}
+    Duration(unsigned int value)
+        :_length(value),_finite(true)
+    {}
 
-        Duration(PositiveInfinity value)
-		:_length(DEFAULT_VALUE),_finite(false)
-        {}
+    Duration(PositiveInfinity value)
+        :_length(DEFAULT_VALUE),_finite(false)
+    {}
 
-		void
-        setValue(unsigned int value);
+    void
+    setValue(unsigned int value);
 
-		void
-		setValue(PositiveInfinity value);
+    void
+    setValue(PositiveInfinity value);
 
-        unsigned int
-        getLength() const throw(IsInfiniteException);
+    unsigned int
+    getLength() const throw(IsInfiniteException);
 
-		bool
-        isFinite() const;
+    bool
+    isFinite() const;
 
-	};
+};
 }
 #endif /* DURATION_HPP_ */

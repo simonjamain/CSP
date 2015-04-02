@@ -34,6 +34,16 @@ namespace CSP
 
         if(solver.NextSolution())
         {
+
+            //debug
+            std::cout << "\n-----------------------------------------";
+            int i = 0;
+            for(auto &timenode : timenodes)
+            {
+                std::cout << "\nT" << i << " : " << timenode->getDate(solver)->Value();
+                ++i;
+            }
+
             return true;
         }
     }

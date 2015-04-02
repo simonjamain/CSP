@@ -32,12 +32,13 @@ namespace CSP
     Duration
     Constraint::getMax() const
     {
+        validateInternalProperties();
         if(_flexAfter.isFinite())
         {
-            return _nominal.getLength() + _flexAfter.getLength();
+            return Duration{_nominal.getLength() + _flexAfter.getLength()};
         }else
         {
-            return PositiveInfinity();
+            return Duration{PositiveInfinity{}};
         }
     }
 
@@ -64,8 +65,16 @@ namespace CSP
 
         operations_research::IntExpr* distance = solver.MakeDifference (_nextTimenode->getDate(solver), _prevTimenode->getDate(solver));
 
-        solver.MakeGreaterOrEqual(distance, int64(getMin().getLength()));
+        solver.AddConstraint(
+                    solver.MakeGreaterOrEqual( distance, int64( getMin().getLength() ) )
+                    );
 
+        if(this->getMax().isFinite())
+        {
+            solver.AddConstraint(
+                        solver.MakeLessOrEqual( distance, int64( getMax().getLength() ))
+                        );
+        }
 
     }
 }

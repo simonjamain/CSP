@@ -17,6 +17,27 @@ namespace CSP
         return constraint;
     }
 
+    Timenode*
+    Scenario::_addTimenode()
+    {
+        Timenode* timenode = new Timenode();
+        _timenodes.push_back(timenode);
+        return timenode;
+    }
+
+    Constraint*
+    Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, int prevTimenode, Timenode* nextTimenode)
+    {
+        switch(prevTimenode)
+        {
+        case CSP_START_NODE:
+            return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
+            break;
+        default:
+            throw ArgumentInvalidException{};
+        }
+    }
+
     Constraint*
     Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode)
     {
@@ -24,19 +45,16 @@ namespace CSP
     }
 
     Constraint*
-    Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* nextTimenode)
+    Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode)
     {
-        return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
+        Timenode* nextTimenode = _addTimenode();
+        return _addConstraint(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
     }
 
     Constraint*
     Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter)
     {
-        Timenode* nextTimenode = new Timenode();
-        _timenodes.push_back(nextTimenode);
+        Timenode* nextTimenode = _addTimenode();
         return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
     }
-
-
-
 }
