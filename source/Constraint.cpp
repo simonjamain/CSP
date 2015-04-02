@@ -23,14 +23,14 @@ namespace CSP
     }
 
     FiniteDuration
-    Constraint::getMin()
+    Constraint::getMin() const
     {
         validateInternalProperties();
         return FiniteDuration(_nominal.getLength() - _flexBefore.getLength());
     }
 
     Duration
-    Constraint::getMax()
+    Constraint::getMax() const
     {
         if(_flexAfter.isFinite())
         {
@@ -41,8 +41,14 @@ namespace CSP
         }
     }
 
+    Timenode*
+    Constraint::getNextTimenode()
+    {
+        return _nextTimenode;
+    }
+
     void
-    Constraint::validateInternalProperties() throw (InternalPropertiesNotValidException)
+    Constraint::validateInternalProperties() const throw (InternalPropertiesNotValidException)
     {
         if(_flexBefore.getLength() > _nominal.getLength())
         {
@@ -51,7 +57,7 @@ namespace CSP
     }
 
     void
-    Constraint::addConstraints(operations_research::Solver& solver) throw (InternalPropertiesNotValidException)
+    Constraint::addConstraints(operations_research::Solver& solver) const throw (InternalPropertiesNotValidException)
     {
         //some constraints can be checked internally
         validateInternalProperties();

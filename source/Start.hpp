@@ -1,20 +1,23 @@
-#ifndef TIMENODE_HPP_
-#define TIMENODE_HPP_
+#ifndef START_HPP_
+#define START_HPP_
 
 #include <constraint_solver/constraint_solver.h>
 #include "../source/Node.hpp"
+#include "../source/Timenode.hpp"
+
 namespace CSP
 {
-    class Timenode : public Node
+    class Start : public Node
     {
     private:
         operations_research::IntVar* _date;
     public:
-        Timenode()
-            :_date(NULL){}
+        Start()
+            :_date(NULL)
+            {}
 
         operations_research::IntVar*
         getDate(operations_research::Solver& solver);
     };
 }
-#endif /* TIMENODE_HPP_ */
+#endif /* START_HPP_ */

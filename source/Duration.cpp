@@ -17,7 +17,7 @@ namespace CSP
 	}
 
     unsigned int
-	Duration::getLength() throw(IsInfiniteException)
+    Duration::getLength() const throw(IsInfiniteException)
 	{
 		if(! _finite)
 		{
@@ -29,7 +29,7 @@ namespace CSP
 	}
 
 	bool
-	Duration::isFinite()
+    Duration::isFinite() const
 	{
 		return _finite;
 	}

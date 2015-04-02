@@ -2,11 +2,11 @@
 #define CSP_HPP_
 
 #include <constraint_solver/constraint_solver.h>
-#include "Constraint.hpp"
+#include "../source/Scenario.hpp"
 
 namespace CSP
 {
     bool
-    isValid(std::vector<Constraint> constraints);
+    isValid(Scenario scenario);
 }
 #endif /* CSP_HPP_ */

@@ -23,15 +23,15 @@ namespace CSP
 		bool
 		_finite;
 	public:
-		~Duration(){};
+        ~Duration(){}
 
         Duration(unsigned int value)
 		:_length(value),_finite(true)
-		{};
+        {}
 
         Duration(PositiveInfinity value)
 		:_length(DEFAULT_VALUE),_finite(false)
-		{};
+        {}
 
 		void
         setValue(unsigned int value);
@@ -40,10 +40,10 @@ namespace CSP
 		setValue(PositiveInfinity value);
 
         unsigned int
-		getLength() throw(IsInfiniteException);
+        getLength() const throw(IsInfiniteException);
 
 		bool
-		isFinite();
+        isFinite() const;
 
 	};
 }

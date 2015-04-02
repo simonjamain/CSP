@@ -20,7 +20,7 @@ namespace CSP
         setValue(unsigned int value);
 
         unsigned int
-		getLength();
+        getLength() const;
 	};
 }
 #endif /* FINITEDURATION_HPP_ */

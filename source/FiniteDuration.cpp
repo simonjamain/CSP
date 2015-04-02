@@ -1,5 +1,5 @@
 #include "FiniteDuration.hpp"
-
+//TODO: make FiniteDuration and Duration inherit the same class to avoid throw warning
 namespace CSP
 {
 	void
@@ -9,7 +9,7 @@ namespace CSP
 	}
 
     unsigned int
-	FiniteDuration::getLength()
+    FiniteDuration::getLength() const
 	{
         return _duration.getLength();
 	}

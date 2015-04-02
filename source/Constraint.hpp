@@ -7,7 +7,6 @@
 #include <constraint_solver/constraint_solver.h>
 namespace CSP
 {
-
     class InternalPropertiesNotValidException
     {
     public:
@@ -21,11 +20,11 @@ namespace CSP
         FiniteDuration _nominal;
         FiniteDuration _flexBefore;
         Duration _flexAfter;
-        Timenode* _prevTimenode;
+        Node* _prevTimenode;
         Timenode* _nextTimenode;
 
     public:
-        Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode)
+        Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode)
             :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_prevTimenode(prevTimenode),_nextTimenode(nextTimenode){}
 
         void
@@ -38,17 +37,19 @@ namespace CSP
         setFlexAfter(Duration duration);
 
         FiniteDuration
-        getMin() throw (InternalPropertiesNotValidException);
+        getMin() const throw (InternalPropertiesNotValidException);
 
         Duration
-        getMax() throw (InternalPropertiesNotValidException);
+        getMax() const throw (InternalPropertiesNotValidException);
+
+        Timenode*
+        getNextTimenode();
 
         void
-        addConstraints(operations_research::Solver& solver) throw (InternalPropertiesNotValidException);
+        validateInternalProperties() const throw (InternalPropertiesNotValidException);
 
         void
-        validateInternalProperties() throw (InternalPropertiesNotValidException);
+        addConstraints(operations_research::Solver& solver) const throw (InternalPropertiesNotValidException);
     };
-
 }
 #endif /* CONSTRAINT_HPP_ */
