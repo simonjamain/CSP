@@ -75,7 +75,34 @@ TEST_CASE("Scenarios can be valid", "[csp]")
 
         REQUIRE(CSP::isValid(scenario));
     }
-    //Invalid scenarios
+
+    SECTION("Scenario #d1 is valid")
+    {
+        CSP::Constraint* firstConstraint = scenario.addConstraint(
+                    CSP::FiniteDuration{10},
+                    CSP::FiniteDuration{5},
+                    CSP::Duration{5});
+
+        scenario.addConstraint(
+                    CSP::FiniteDuration{10},
+                    CSP::FiniteDuration{5},
+                    CSP::Duration{5},
+                    firstConstraint->getNextTimenode());
+    }
+
+    SECTION("Scenario #d2 is valid")
+    {
+        CSP::Constraint* firstConstraint = scenario.addConstraint(
+                    CSP::FiniteDuration{10},
+                    CSP::FiniteDuration{10},
+                    CSP::Duration{5});
+
+        scenario.addConstraint(
+                    CSP::FiniteDuration{10},
+                    CSP::FiniteDuration{10},
+                    CSP::Duration{CSP::PositiveInfinity{}},
+                    firstConstraint->getNextTimenode());
+    }
 }
 
 TEST_CASE("Scenarios can be not valid","[csp]")
