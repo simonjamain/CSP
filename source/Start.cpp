@@ -8,6 +8,7 @@ namespace CSP
     {
         if(_date == NULL)
         {
+            // on contraint le domaine de la variable
             _date = solver.MakeIntVar(0, 0);
         }
         return _date;

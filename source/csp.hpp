@@ -6,6 +6,11 @@
 
 namespace CSP
 {
+    /**
+     * @brief isValid Détermine la faisabilité d'un scénario.
+     * @param scenario Le scénario à contrôler.
+     * @return True si valide, False si non valide.
+     */
     bool
     isValid(Scenario scenario);
 }

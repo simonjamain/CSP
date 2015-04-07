@@ -1,6 +1,7 @@
 #include "csp.hpp"
 #include <constraint_solver/constraint_solver.h>
 #include "Constraint.hpp"
+
 namespace CSP
 {
     bool
@@ -28,21 +29,26 @@ namespace CSP
             dates.push_back(timenode->getDate(solver));
         }
 
-        operations_research::DecisionBuilder* const db = solver.MakePhase(dates, operations_research::Solver::CHOOSE_FIRST_UNBOUND, operations_research::Solver::ASSIGN_MIN_VALUE);
+        operations_research::DecisionBuilder* const db = solver.MakePhase(
+                    dates,
+                    operations_research::Solver::CHOOSE_FIRST_UNBOUND,
+                    operations_research::Solver::ASSIGN_MIN_VALUE);
 
         solver.NewSearch(db);
 
         if(solver.NextSolution())
         {
 
-            //debug
-            std::cout << "\n-----------------------------------------";
+#if CSP_DEBUG_DISPLAY_VALUE
+            // print individual values
+            std::cout << "-----------------------------------------\n";
             int i = 0;
             for(auto &timenode : timenodes)
             {
-                std::cout << "\nT" << i << " : " << timenode->getDate(solver)->Value();
+                std::cout << "T" << i << " : " << timenode->getDate(solver)->Value() << "\n";
                 ++i;
             }
+#endif
 
             return true;
         }

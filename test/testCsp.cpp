@@ -10,7 +10,8 @@
 #include "../source/Start.hpp"
 #include "../source/Timenode.hpp"
 
-#define TEST_INFINITE_VALUE (CSP::PositiveInfinity())
+#define CSP_TEST_LARGE_SCENARION_SIZE 10000
+#define CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH 10
 
 TEST_CASE("Scenarios can be valid", "[csp]")
 {
@@ -112,6 +113,45 @@ TEST_CASE("Scenarios can be not valid","[csp]")
                     secondConstraint->getNextTimenode());
 
         REQUIRE_FALSE(CSP::isValid(scenario));
+    }
+}
+
+TEST_CASE("We can work with large scenarios", "[csp]")
+{
+    CSP::Scenario scenario;
+    CSP::Constraint* prevConstraint = scenario.addConstraint(
+                CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                CSP::Duration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH});
+    CSP::Constraint* nextConstraint;
+    SECTION("Long line of constraints")
+    {
+        for(int nbConstraint = 1; nbConstraint < CSP_TEST_LARGE_SCENARION_SIZE; ++nbConstraint)
+        {
+            nextConstraint = scenario.addConstraint(
+                        CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                        CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                        CSP::Duration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                        prevConstraint->getNextTimenode());
+
+            prevConstraint = nextConstraint;
+        }
+
+        REQUIRE(CSP::isValid(scenario));
+    }
+    SECTION("Long row of constraints")
+    {
+        for(int nbConstraint = 1; nbConstraint < CSP_TEST_LARGE_SCENARION_SIZE; ++nbConstraint)
+        {
+            nextConstraint = scenario.addConstraint(
+                        CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                        CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                        CSP::Duration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
+                        CSP_START_NODE,
+                        prevConstraint->getNextTimenode());
+        }
+
+        REQUIRE(CSP::isValid(scenario));
     }
 
 }

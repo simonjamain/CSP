@@ -14,7 +14,7 @@ namespace CSP
     public:
         Start()
             :_date(NULL)
-            {}
+        {}
 
         operations_research::IntVar*
         getDate(operations_research::Solver& solver);

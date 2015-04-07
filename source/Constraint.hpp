@@ -7,6 +7,10 @@
 #include <constraint_solver/constraint_solver.h>
 namespace CSP
 {
+    /**
+     * @brief The InternalPropertiesNotValidException class Cette exception est destinée à être
+     * levée quand les propriétés (durées) d'une contrainte sont incohérentes.
+     */
     class InternalPropertiesNotValidException
     {
     public:

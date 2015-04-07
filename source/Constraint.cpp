@@ -61,7 +61,7 @@ namespace CSP
     Constraint::addConstraints(operations_research::Solver& solver) const throw (InternalPropertiesNotValidException)
     {
         //some constraints can be checked internally
-        validateInternalProperties();
+        validateInternalProperties() ;
 
         operations_research::IntExpr* distance = solver.MakeDifference (_nextTimenode->getDate(solver), _prevTimenode->getDate(solver));
 
