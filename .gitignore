@@ -4,9 +4,10 @@ gecode.old/
 keep/
 lib/
 
-#os specific
+#os and software specific
 *.autosave
 *.user
+*.txt.user
 
 #standard c++
 # Compiled Object files
