@@ -1,6 +1,14 @@
 #usefull ressources: https://github.com/ggutierrez/gecodert
 #set(MAKE_C_COMPILER "/usr/bin/gcc")
 #set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+
+##########################################################################
+# CMAKE POLICIES
+##########################################################################
+cmake_policy(SET CMP0037 NEW)
+
+##########################################################################
+
 set(PROJECT_NAME CSP)
 project(${PROJECT_NAME})
 ADD_DEFINITIONS(
@@ -16,10 +24,10 @@ set(CMAKE_MODULE_PATH
   )
 message(STATUS "compiler : ${CMAKE_CXX_COMPILER}")
 ##########################################################################
-# Google or-tools
+# Modules
 ##########################################################################
 find_package(OrTools REQUIRED)# generate ORTOOLS_INCLUDE_DIR and ORTOOLS_LIBRARY
-find_package(Catch REQUIRED)# generate CATCH_INCLUDE_DIR
+#find_package(Catch REQUIRED)# generate CATCH_INCLUDE_DIR
 ##########################################################################
 # This project products
 ##########################################################################
@@ -36,26 +44,29 @@ target_link_libraries(${PROJECT_NAME} ${ORTOOLS_LIBRARY})
 ##########################################################################
 # Tests
 ##########################################################################
-file(GLOB_RECURSE TESTS_HDRS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.hpp")
-file(GLOB_RECURSE TESTS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp")
+#file(GLOB_RECURSE TESTS_HDRS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.hpp")
+#file(GLOB_RECURSE TESTS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp")
 
-set(TESTS
-          ${TESTS_HDRS}
-          ${TESTS_SRCS}
-  )
+#set(TESTS
+#          ${TESTS_HDRS}
+#          ${TESTS_SRCS}
+#  )
 
-add_executable(runTests "${TESTS}")
-target_link_libraries(runTests ${PROJECT_NAME})
+#add_executable(runTests "${TESTS}")
+#target_link_libraries(runTests ${PROJECT_NAME})
 ##########################################################################
 # Examples
 ##########################################################################
 file(GLOB_RECURSE EXAMPLES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp")
 
 
-foreach( example ${EXAMPLES} )
-    # I used a simple string replace, to cut off .cpp.
-    string( REPLACE ".cpp" "" exampleName ${example} )
-    add_executable( ${exampleName} ${example} )
+foreach( exampleFile ${EXAMPLES} )
+
+    get_filename_component(exampleName ${exampleFile} NAME_WE)
+
+    message(STATUS "exampleName : ${exampleName}")
+
+    add_executable( ${exampleName} ${exampleFile} )
     # Link
     target_link_libraries( ${exampleName} ${PROJECT_NAME} )
 endforeach()
