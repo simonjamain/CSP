@@ -10,7 +10,7 @@
 #include "../source/Start.hpp"
 #include "../source/Timenode.hpp"
 
-#define CSP_TEST_LARGE_SCENARION_SIZE 10000
+#define CSP_TEST_LARGE_SCENARIO_SIZE 1000
 #define CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH 10
 
 TEST_CASE("Scenarios can be valid", "[csp]")
@@ -153,7 +153,7 @@ TEST_CASE("We can work with large scenarios", "[csp]")
     CSP::Constraint* nextConstraint;
     SECTION("Long line of constraints")
     {
-        for(int nbConstraint = 1; nbConstraint < CSP_TEST_LARGE_SCENARION_SIZE; ++nbConstraint)
+        for(int nbConstraint = 1; nbConstraint < CSP_TEST_LARGE_SCENARIO_SIZE; ++nbConstraint)
         {
             nextConstraint = scenario.addConstraint(
                         CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
@@ -168,7 +168,7 @@ TEST_CASE("We can work with large scenarios", "[csp]")
     }
     SECTION("Long row of constraints")
     {
-        for(int nbConstraint = 1; nbConstraint < CSP_TEST_LARGE_SCENARION_SIZE; ++nbConstraint)
+        for(int nbConstraint = 1; nbConstraint < CSP_TEST_LARGE_SCENARIO_SIZE; ++nbConstraint)
         {
             nextConstraint = scenario.addConstraint(
                         CSP::FiniteDuration{CSP_TEST_DEFAULT_CONSTRAINT_NOMINAL_LENGTH},
