@@ -1,6 +1,6 @@
 ## instruction d'installation
 ### Mac OSX
-* You then need to install the latest version of the command line tools for XCode (the full XCode isn't necessary).
+* You then need to install the latest version of the [command line tools for XCode](https://developer.apple.com/downloads/index.action) (the full XCode isn't necessary).
 * To install javac, just run javac. This will download and install Java.
 * To install cmake, please use download the official .dmg archive from http://www.cmake.org/download.
 ### Ubuntu
