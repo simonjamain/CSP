@@ -39,7 +39,7 @@ namespace CSP
         if(solver.NextSolution())
         {
 
-#if CSP_DEBUG_DISPLAY_VALUE
+#ifdef CSP_LOG_VALUES
             // print individual values
             std::cout << "-----------------------------------------\n";
             int i = 0;

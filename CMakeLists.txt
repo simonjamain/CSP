@@ -64,9 +64,21 @@ foreach( exampleFile ${EXAMPLES} )
 
     get_filename_component(exampleName ${exampleFile} NAME_WE)
 
-    message(STATUS "exampleName : ${exampleName}")
+    #message(STATUS "exampleName : ${exampleName}")
 
     add_executable( ${exampleName} ${exampleFile} )
     # Link
     target_link_libraries( ${exampleName} ${PROJECT_NAME} )
 endforeach()
+
+##########################################################################
+# Debug
+##########################################################################
+
+option(CSP_LOG_VALUES "Log dates found by solver"
+       OFF)
+
+if(${CSP_LOG_VALUES})
+  add_definitions(-DCSP_LOG_VALUES)
+  message(STATUS "Debogage des valeures des dates actif.")
+endif()
