@@ -24,12 +24,11 @@ namespace CSP
         FiniteDuration _nominal;
         FiniteDuration _flexBefore;
         Duration _flexAfter;
-        Node* _prevTimenode;
         Timenode* _nextTimenode;
 
     public:
-        Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode)
-            :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_prevTimenode(prevTimenode),_nextTimenode(nextTimenode){}
+        Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* nextTimenode)
+            :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_nextTimenode(nextTimenode){}
 
         void
         setNominal(FiniteDuration duration);

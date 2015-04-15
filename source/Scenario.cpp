@@ -10,7 +10,7 @@ namespace CSP
     Constraint*
     Scenario::_addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode)
     {
-        Constraint* constraint = new Constraint(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
+        Constraint* constraint = new Constraint(nominal, flexBefore, flexAfter, nextTimenode);
 
         prevTimenode->addNextConstraint(constraint);
 
