@@ -12,7 +12,7 @@ namespace CSP
     {
         Constraint* constraint = new Constraint(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
 
-        _constraints.push_back(constraint);
+        prevTimenode->addNextConstraint(constraint);
 
         return constraint;
     }

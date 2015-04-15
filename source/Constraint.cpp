@@ -1,6 +1,7 @@
 #include "Constraint.hpp"
 #include "Duration.hpp"
 #include "FiniteDuration.hpp"
+#include "Node.hpp"
 
 namespace CSP
 {
@@ -58,12 +59,12 @@ namespace CSP
     }
 
     void
-    Constraint::addConstraints(operations_research::Solver& solver) const throw (InternalPropertiesNotValidException)
+    Constraint::applyConstraints(Node* prevTimenode, operations_research::Solver& solver) const throw (InternalPropertiesNotValidException)
     {
         //some constraints can be checked internally
         validateInternalProperties() ;
 
-        operations_research::IntExpr* distance = solver.MakeDifference (_nextTimenode->getDate(solver), _prevTimenode->getDate(solver));
+        operations_research::IntExpr* distance = solver.MakeDifference (_nextTimenode->getDate(solver), prevTimenode->getDate(solver));
 
         solver.AddConstraint(
                     solver.MakeGreaterOrEqual( distance, int64( getMin().getLength() ) )

@@ -7,14 +7,7 @@ namespace CSP
 {
     class Timenode : public Node
     {
-    private:
-        operations_research::IntVar* _date;
-    public:
-        Timenode()
-            :_date(NULL){}
 
-        operations_research::IntVar*
-        getDate(operations_research::Solver& solver);
     };
 }
 #endif /* TIMENODE_HPP_ */

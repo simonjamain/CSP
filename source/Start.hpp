@@ -9,15 +9,9 @@ namespace CSP
 {
     class Start : public Node
     {
-    private:
-        operations_research::IntVar* _date;
     public:
-        Start()
-            :_date(NULL)
-        {}
-
         operations_research::IntVar*
-        getDate(operations_research::Solver& solver);
+        getDate(operations_research::Solver& solver) override;
     };
 }
 #endif /* START_HPP_ */

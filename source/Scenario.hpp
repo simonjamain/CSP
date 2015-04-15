@@ -22,7 +22,6 @@ namespace CSP
     {
     private:
         Start* _start;
-        std::vector<Constraint*> _constraints;
         std::vector<Node*> _timenodes;
         // this method allow to explicitely attach a constraint to the start node
         Constraint*
@@ -66,12 +65,6 @@ namespace CSP
           */
         Constraint*
         addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode);
-
-        const std::vector<Constraint*>
-        getConstraints() const
-        {
-            return _constraints;
-        };
 
         const std::vector<Node*>
         getTimenodes() const
