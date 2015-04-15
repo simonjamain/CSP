@@ -12,12 +12,8 @@
 
 namespace CSP
 {
-    class ArgumentInvalidException//TODO: message
-    {
-    public:
-        ArgumentInvalidException(){}
-        ~ArgumentInvalidException(){}
-    };
+    enum ConstraintAttachment { START };
+
     class Scenario
     {
     private:
@@ -58,7 +54,7 @@ namespace CSP
          * @return
          */
         Constraint*
-        addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, int prevTimenode, Timenode* nextTimenode);
+        addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode);
 
         /**
           Add a constraint a a prevTimenode set as start and a already defined nextTimenode

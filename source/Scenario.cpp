@@ -26,15 +26,14 @@ namespace CSP
     }
 
     Constraint*
-    Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, int prevTimenode, Timenode* nextTimenode)
+    Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode)
     {
         switch(prevTimenode)
         {
-        case CSP_START_NODE:
+        default:
+        case START:
             return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
             break;
-        default:
-            throw ArgumentInvalidException{};
         }
     }
 
