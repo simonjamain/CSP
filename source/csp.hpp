@@ -12,6 +12,6 @@ namespace CSP
      * @return True si valide, False si non valide.
      */
     bool
-    isValid(Scenario scenario);
+    isValid(Scenario& scenario);
 }
 #endif /* CSP_HPP_ */

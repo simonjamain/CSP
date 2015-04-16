@@ -5,7 +5,7 @@
 namespace CSP
 {
 bool
-isValid(Scenario scenario)
+isValid(Scenario& scenario)
 {
     operations_research::Solver solver("i-score time constraint Solver");
 
