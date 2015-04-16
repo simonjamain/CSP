@@ -9,19 +9,92 @@
 
 #define FDUR_0 CSP::FiniteDuration{0}
 #define DUR_0 CSP::Duration{0}
+
+#define FDUR_5 CSP::FiniteDuration{5}
+#define DUR_5 CSP::Duration{5}
+
 #define FDUR_10 CSP::FiniteDuration{10}
 #define DUR_10 CSP::Duration{10}
 
-//TEST EXAMPLE
+#define DUR_INF CSP::Duration{CSP::PositiveInfinity{}}
+
 TEST(csp, validA1)
 {
-    CSP::Scenario scenario;
+    CSP::Scenario scenarioA1;
 
-    scenario.addConstraint(
+    scenarioA1.addConstraint(
                 FDUR_0,
                 FDUR_0,
                 DUR_0
                 );
 
-    ASSERT_TRUE(CSP::isValid(scenario));
+    ASSERT_TRUE(CSP::isValid(scenarioA1));
+}
+
+TEST(csp, validA2)
+{
+    CSP::Scenario scenarioA2;
+
+    scenarioA2.addConstraint(
+                FDUR_10,
+                FDUR_10,
+                DUR_10
+                );
+
+    ASSERT_TRUE(CSP::isValid(scenarioA2));
+}
+
+TEST(csp, validA3)
+{
+    CSP::Scenario scenariA3;
+
+    scenariA3.addConstraint(
+                FDUR_10,
+                FDUR_10,
+                DUR_INF
+                );
+
+    ASSERT_TRUE(CSP::isValid(scenariA3));
+}
+
+TEST(csp, validC1)
+{
+    CSP::Scenario scenarioC1;
+
+    CSP::Constraint* c1 = scenarioC1.addConstraint(
+                FDUR_10,
+                FDUR_0,
+                DUR_5
+                );
+
+    scenarioC1.addConstraint(
+                FDUR_10,
+                FDUR_0,
+                DUR_10,
+                CSP::ConstraintAttachment::START,
+                c1->getNextTimenode()
+                );
+
+    ASSERT_TRUE(CSP::isValid(scenarioC1));
+}
+
+TEST(csp, validC2)
+{
+    CSP::Scenario scenarioC2;
+
+    CSP::Constraint* c1 = scenarioC2.addConstraint(
+                FDUR_10,
+                FDUR_0,
+                DUR_5
+                );
+
+    scenarioC2.addConstraint(
+                FDUR_10,
+                FDUR_0,
+                DUR_INF,
+                CSP::ConstraintAttachment::START,
+                c1->getNextTimenode()
+                );
+
+    ASSERT_TRUE(CSP::isValid(scenarioC2));
 }
