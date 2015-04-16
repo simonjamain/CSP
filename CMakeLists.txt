@@ -27,6 +27,8 @@ message(STATUS "compiler : ${CMAKE_CXX_COMPILER}")
 # Modules
 ##########################################################################
 find_package(OrTools REQUIRED)# generate ORTOOLS_INCLUDE_DIR and ORTOOLS_LIBRARY
+find_package(GoogleTest REQUIRED)
+
 #find_package(Catch REQUIRED)# generate CATCH_INCLUDE_DIR
 ##########################################################################
 # This project products
@@ -44,16 +46,18 @@ target_link_libraries(${PROJECT_NAME} ${ORTOOLS_LIBRARY})
 ##########################################################################
 # Tests
 ##########################################################################
-#file(GLOB_RECURSE TESTS_HDRS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.hpp")
-#file(GLOB_RECURSE TESTS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp")
+file(GLOB_RECURSE TESTS_HDRS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.hpp")
+file(GLOB_RECURSE TESTS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/test/*.cpp")
 
-#set(TESTS
-#          ${TESTS_HDRS}
-#          ${TESTS_SRCS}
-#  )
+set(TESTS
+          ${TESTS_HDRS}
+          ${TESTS_SRCS}
+          ${GTEST_MAIN}
+  )
 
-#add_executable(runTests "${TESTS}")
-#target_link_libraries(runTests ${PROJECT_NAME})
+add_executable(runTests "${TESTS}")
+target_link_libraries(runTests ${PROJECT_NAME} gtest gtest_main)
+add_test( runTests runTests )
 ##########################################################################
 # Examples
 ##########################################################################

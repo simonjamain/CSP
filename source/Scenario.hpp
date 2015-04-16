@@ -12,61 +12,46 @@
 
 namespace CSP
 {
-    enum ConstraintAttachment { START };
+enum ConstraintAttachment { START };
 
-    class Scenario
+class Scenario
+{
+private:
+    Start* _start;
+    std::vector<Node*> _timenodes;
+    // this method allow to explicitely attach a constraint to the start node
+    Constraint*
+    _addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode);
+    // this create a new timenode and add it to the nodes pool
+    Timenode*
+    _addTimenode();
+public:
+    Scenario()
+        :_start(new Start())
     {
-    private:
-        Start* _start;
-        std::vector<Node*> _timenodes;
-        // this method allow to explicitely attach a constraint to the start node
-        Constraint*
-        _addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode);
-        // this create a new timenode and add it to the nodes pool
-        Timenode*
-        _addTimenode();
-    public:
-        Scenario()
-            :_start(new Start())
-        {
-            _timenodes.push_back(_start);
-        }
+        _timenodes.push_back(_start);
+    }
 
-        /**
-          Add a constraint with a prevTimenode set as start and a new nextTimenode
-          */
-        Constraint*
-        addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter);
+    Constraint*
+    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter);
 
-        /**
-          Add a constraint with a given prevTimenode and a new nextTimenode
-          */
-        Constraint*
-        addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode);
 
-        /**
-         * @brief Scenario::addConstraint Add a new Constraint with start as the prevTimenode and a given nextTimenode
-         * @param nominal
-         * @param flexBefore
-         * @param flexAfter
-         * @param prevTimenode
-         * @param nextTimenode
-         * @return
-         */
-        Constraint*
-        addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode);
+    Constraint*
+    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode);
 
-        /**
-          Add a constraint a a prevTimenode set as start and a already defined nextTimenode
-          */
-        Constraint*
-        addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode);
 
-        const std::vector<Node*>
-        getTimenodes() const
-        {
-            return _timenodes;
-        };
+    Constraint*
+    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode);
+
+
+    Constraint*
+    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode);
+
+    const std::vector<Node*>
+    getTimenodes() const
+    {
+        return _timenodes;
     };
+};
 }
 #endif /* SCENARIO_HPP_ */
