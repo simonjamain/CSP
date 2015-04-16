@@ -483,8 +483,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5556349"
-     inkscape:cx="521.4045"
-     inkscape:cy="657.38814"
+     inkscape:cx="637.11288"
+     inkscape:cy="695.9576"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -4404,8 +4404,8 @@
            x="26.574802"
            y="33.661396"
            style="font-size:20px;text-align:center;text-anchor:middle;fill:#2d3b93;fill-opacity:1" /></flowRegion><flowPara
-         id="flowPara7503"
-         style="font-size:14px;fill:#2d3b93;fill-opacity:1">(d1)</flowPara></flowRoot>    <g
+         style="font-size:14px;fill:#2d3b93;fill-opacity:1"
+         id="flowPara4115">(d2)</flowPara></flowRoot>    <g
        transform="translate(549.2126,301.1811)"
        id="g7505">
       <path
@@ -4561,8 +4561,8 @@
            x="26.574802"
            y="33.661396"
            style="font-size:20px;text-align:center;text-anchor:middle;fill:#389338;fill-opacity:1" /></flowRegion><flowPara
-         id="flowPara7569"
-         style="font-size:14px;fill:#389338;fill-opacity:1">10</flowPara></flowRoot>    <flowRoot
+         style="font-size:14px;fill:#389338;fill-opacity:1"
+         id="flowPara4119">5</flowPara></flowRoot>    <flowRoot
        transform="translate(651.09619,420.10578)"
        style="font-size:20px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#389338;fill-opacity:1;stroke:none;font-family:Sans"
        id="flowRoot7571"

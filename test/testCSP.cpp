@@ -118,3 +118,23 @@ TEST(csp, validD1)
 
     ASSERT_TRUE(CSP::isValid(scenarioD1));
 }
+
+TEST(csp, validD2)
+{
+    CSP::Scenario scenarioD2;
+
+    CSP::Constraint* c1 = scenarioD2.addConstraint(
+                FDUR_10,
+                FDUR_5,
+                DUR_5
+                );
+
+    scenarioD2.addConstraint(
+                FDUR_10,
+                FDUR_10,
+                DUR_INF,
+                c1->getNextTimenode()
+                );
+
+    ASSERT_TRUE(CSP::isValid(scenarioD2));
+}
