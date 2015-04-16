@@ -16,6 +16,9 @@
 #define FDUR_10 CSP::FiniteDuration{10}
 #define DUR_10 CSP::Duration{10}
 
+#define FDUR_15 CSP::FiniteDuration{15}
+#define DUR_15 CSP::Duration{15}
+
 #define DUR_INF CSP::Duration{CSP::PositiveInfinity{}}
 
 TEST(csp, validA1)
@@ -137,4 +140,16 @@ TEST(csp, validD2)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioD2));
+}
+
+TEST(csp, invalidA1)
+{
+    CSP::Scenario scenarioA1;
+
+    CSP::Constraint* c1 = scenarioA1.addConstraint(
+                FDUR_10,
+                FDUR_15,
+                DUR_0
+                );
+    ASSERT_FALSE(CSP::isValid(scenarioA1));
 }
