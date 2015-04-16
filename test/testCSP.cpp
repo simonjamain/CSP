@@ -151,5 +151,28 @@ TEST(csp, invalidA1)
                 FDUR_15,
                 DUR_0
                 );
+
     ASSERT_FALSE(CSP::isValid(scenarioA1));
+}
+
+TEST(csp, invalidC1)
+{
+    CSP::Scenario scenarioC1;
+
+    CSP::Constraint* c1 = scenarioC1.addConstraint(
+                FDUR_5,
+                FDUR_5,
+                DUR_0
+                );
+
+    scenarioC1.addConstraint(
+                FDUR_15,
+                FDUR_5,
+                DUR_10,
+                CSP::ConstraintAttachment::START,
+                c1->getNextTimenode()
+                );
+
+
+    ASSERT_FALSE(CSP::isValid(scenarioC1));
 }
