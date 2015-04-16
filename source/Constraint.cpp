@@ -26,14 +26,12 @@ namespace CSP
     FiniteDuration
     Constraint::getMin() const
     {
-        validateInternalProperties();
         return FiniteDuration(_nominal.getLength() - _flexBefore.getLength());
     }
 
     Duration
     Constraint::getMax() const
     {
-        validateInternalProperties();
         if(_flexAfter.isFinite())
         {
             return Duration{_nominal.getLength() + _flexAfter.getLength()};
@@ -50,19 +48,12 @@ namespace CSP
     }
 
     void
-    Constraint::validateInternalProperties() const throw (InternalPropertiesNotValidException)
+    Constraint::applyConstraints(Node* prevTimenode, operations_research::Solver& solver) const
     {
-        if(_flexBefore.getLength() > _nominal.getLength())
-        {
-            throw(InternalPropertiesNotValidException());
-        }
-    }
 
-    void
-    Constraint::applyConstraints(Node* prevTimenode, operations_research::Solver& solver) const throw (InternalPropertiesNotValidException)
-    {
-        //some constraints can be checked internally
-        validateInternalProperties() ;
+        solver.AddConstraint(
+                    solver.MakeGreaterOrEqual( solver.MakeIntConst(int64(_nominal.getLength())) , int64(_flexBefore.getLength()) )
+                    );
 
         operations_research::IntExpr* distance = solver.MakeDifference (_nextTimenode->getDate(solver), prevTimenode->getDate(solver));
 

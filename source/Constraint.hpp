@@ -52,7 +52,7 @@ namespace CSP
         validateInternalProperties() const throw (InternalPropertiesNotValidException);
 
         void
-        applyConstraints(Node* prevTimenode, operations_research::Solver& solver) const throw (InternalPropertiesNotValidException);
+        applyConstraints(Node* prevTimenode, operations_research::Solver& solver) const;
     };
 }
 #endif /* CONSTRAINT_HPP_ */
