@@ -18,7 +18,7 @@ Scenario::_addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Dura
 }
 
 Timenode*
-Scenario::_addTimenode()
+Scenario::addTimenode()
 {
     Timenode* timenode = new Timenode();
     _timenodes.push_back(timenode);
@@ -46,14 +46,15 @@ Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Durat
 Constraint*
 Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode)
 {
-    Timenode* nextTimenode = _addTimenode();
+    Timenode* nextTimenode = addTimenode();
     return _addConstraint(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
 }
 
 Constraint*
 Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter)
 {
-    Timenode* nextTimenode = _addTimenode();
+    Timenode* nextTimenode = addTimenode();
     return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
 }
+
 }

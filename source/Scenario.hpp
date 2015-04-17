@@ -22,15 +22,16 @@ private:
     // this method allow to explicitely attach a constraint to the start node
     Constraint*
     _addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode);
-    // this create a new timenode and add it to the nodes pool
-    Timenode*
-    _addTimenode();
+
 public:
     Scenario()
         :_start(new Start())
     {
         _timenodes.push_back(_start);
     }
+
+    Timenode*
+    addTimenode();
 
     Constraint*
     addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter);
