@@ -20,6 +20,22 @@ Node::addNextConstraint(Constraint* nextConstraint)
     _nextConstraints.push_back(nextConstraint);
 }
 
+bool
+Node::removeNextConstraint(Constraint* constraintToRemove)
+{
+    std::vector<Constraint*>::iterator constraintPosition = find (_nextConstraints.begin(), _nextConstraints.end(), constraintToRemove);
+    if (constraintPosition != _nextConstraints.end())
+    {
+        _nextConstraints.erase(constraintPosition);
+        return true;
+    }else
+    {
+        return false;
+    }
+
+    delete constraintToRemove;
+}
+
 std::vector<Constraint*>
 Node::getNextConstraints()
 {

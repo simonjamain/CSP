@@ -18,8 +18,9 @@ class Scenario
 {
 private:
     Start* _start;
+
     std::vector<Node*> _timenodes;
-    // this method allow to explicitely attach a constraint to the start node
+
     Constraint*
     _addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode);
 
@@ -36,17 +37,17 @@ public:
     Constraint*
     addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter);
 
-
     Constraint*
     addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode);
-
 
     Constraint*
     addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode);
 
-
     Constraint*
     addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode);
+
+    void
+    removeConstraint(Constraint* constraint);//TODO: throw ex if constraint not found?
 
     const std::vector<Node*>
     getTimenodes() const

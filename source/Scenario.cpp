@@ -57,4 +57,16 @@ Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Durat
     return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
 }
 
+void
+Scenario::removeConstraint(Constraint* constraintToRemove)
+{
+    for(auto &node : _timenodes)
+    {
+        if(node->removeNextConstraint(constraintToRemove))
+        {
+            break;
+        }
+    }
+}
+
 }

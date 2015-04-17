@@ -23,6 +23,9 @@ public:
     void
     addNextConstraint(Constraint* nextConstraint);
 
+    bool
+    removeNextConstraint(Constraint* constraintToRemove);
+
     std::vector<Constraint*>
     getNextConstraints();
 
