@@ -7,52 +7,49 @@
 #include <constraint_solver/constraint_solver.h>
 namespace CSP
 {
-    /**
+/**
      * @brief The InternalPropertiesNotValidException class Cette exception est destinée à être
      * levée quand les propriétés (durées) d'une contrainte sont incohérentes.
      */
-    class InternalPropertiesNotValidException
-    {
-    public:
-        InternalPropertiesNotValidException(){}
-        ~InternalPropertiesNotValidException(){}
-    };
+class InternalPropertiesNotValidException
+{
+public:
+    InternalPropertiesNotValidException(){}
+    ~InternalPropertiesNotValidException(){}
+};
 
-    class Constraint
-    {
-    private:
-        FiniteDuration _nominal;
-        FiniteDuration _flexBefore;
-        Duration _flexAfter;
-        Timenode* _nextTimenode;
+class Constraint
+{
+private:
+    FiniteDuration _nominal;
+    FiniteDuration _flexBefore;
+    Duration _flexAfter;
+    Timenode* _nextTimenode;
 
-    public:
-        Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* nextTimenode)
-            :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_nextTimenode(nextTimenode){}
+public:
+    Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* nextTimenode)
+        :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_nextTimenode(nextTimenode){}
 
-        void
-        setNominal(FiniteDuration duration);
+    void
+    setNominal(FiniteDuration duration);
 
-        void
-        setFlexBefore(FiniteDuration duration);
+    void
+    setFlexBefore(FiniteDuration duration);
 
-        void
-        setFlexAfter(Duration duration);
+    void
+    setFlexAfter(Duration duration);
 
-        FiniteDuration
-        getMin() const throw (InternalPropertiesNotValidException);
+    FiniteDuration
+    getMin() const throw (InternalPropertiesNotValidException);
 
-        Duration
-        getMax() const throw (InternalPropertiesNotValidException);
+    Duration
+    getMax() const throw (InternalPropertiesNotValidException);
 
-        Timenode*
-        getNextTimenode();
+    Timenode*
+    getNextTimenode();
 
-        void
-        validateInternalProperties() const throw (InternalPropertiesNotValidException);
-
-        void
-        applyConstraints(Node* prevTimenode, operations_research::Solver& solver) const;
-    };
+    void
+    applyConstraints(Node* prevTimenode, std::shared_ptr<operations_research::Solver> solver);
+};
 }
 #endif /* CONSTRAINT_HPP_ */

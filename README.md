@@ -48,9 +48,9 @@ Pour activer le déébuggage, passez la commande suivante a cmake :
 ```cmake
 -DCMAKE_BUILD_TYPE=Debug
 ```
-De plus, vous pouvez afficher sur la sortie standard les valeurs retournés par le solver en spécifiant cette option :
+De plus, vous pouvez afficher sur la sortie standard les valeurs retournés par le solver, et afficher des informations de debuggage du modele en spécifiant via les options suivantes :
 ```cmake
--DCSP_LOG_VALUES=ON
+-DCSP_LOG_VALUES=ON -DCSP_DEBUG_MODEL=ON
 ```
 
 ## Known bugs

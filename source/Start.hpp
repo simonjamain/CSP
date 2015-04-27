@@ -9,9 +9,10 @@ namespace CSP
 {
     class Start : public Node
     {
-    public:
+    private:
+        virtual
         operations_research::IntVar*
-        getDate(operations_research::Solver& solver) override;
+        _makeDate(operations_research::Solver* solver) override;
     };
 }
 #endif /* START_HPP_ */

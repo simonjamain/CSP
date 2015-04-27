@@ -7,13 +7,15 @@ namespace CSP
 bool
 isValid(Scenario& scenario)
 {
-    operations_research::Solver solver("i-score time constraint Solver");
+    bool valid = false;
+    std::shared_ptr<operations_research::Solver> solver = std::make_shared<operations_research::Solver>("i-score time constraint Solver");
 
     const std::vector<Node*> timenodes = scenario.getTimenodes();
     std::vector<operations_research::IntVar*> dates;
 
     for(auto &node : timenodes)
     {
+        dates.push_back( node->getDate(solver) );
         try
         {
             node->applyConstraints(solver);
@@ -23,19 +25,14 @@ isValid(Scenario& scenario)
         }
     }
 
-    for(auto &timenode : timenodes)
-    {
-        dates.push_back(timenode->getDate(solver));
-    }
-
-    operations_research::DecisionBuilder* const db = solver.MakePhase(
+    operations_research::DecisionBuilder* const db = solver->MakePhase(
                 dates,
                 operations_research::Solver::CHOOSE_FIRST_UNBOUND,
                 operations_research::Solver::ASSIGN_MIN_VALUE);
 
-    solver.NewSearch(db);
+    solver->NewSearch(db);
 
-    if(solver.NextSolution())
+    if(solver->NextSolution())
     {
 
 #ifdef CSP_LOG_VALUES
@@ -49,7 +46,10 @@ isValid(Scenario& scenario)
         }
 #endif
 
-        return true;
+        valid = true;
     }
+
+    solver->EndSearch();
+    return valid;
 }
 }

@@ -86,3 +86,12 @@ if(${CSP_LOG_VALUES})
   add_definitions(-DCSP_LOG_VALUES)
   message(STATUS "Debogage des valeures des dates actif.")
 endif()
+
+option(CSP_DEBUG_MODEL "Log dates found by solver"
+       OFF)
+
+if(${CSP_DEBUG_MODEL})
+  add_definitions(-DCSP_DEBUG_MODEL)
+  message(STATUS "Debogage du modele actif.")
+endif()
+

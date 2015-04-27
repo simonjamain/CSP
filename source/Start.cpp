@@ -3,14 +3,9 @@
 #include <constraint_solver/constraint_solver.h>
 namespace CSP
 {
-    operations_research::IntVar*
-    Start::getDate(operations_research::Solver& solver)
-    {
-        if(_date == NULL)
-        {
-            // on contraint le domaine de la variable
-            _date = solver.MakeIntVar(0, 0);
-        }
-        return _date;
-    }
+operations_research::IntVar*
+Start::_makeDate(operations_research::Solver* solver)
+{
+    return solver->MakeIntVar(0, 0);
+}
 }

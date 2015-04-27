@@ -1,3 +1,4 @@
+
 #include "../source/Scenario.hpp"
 #include "../source/csp.hpp"
 #include "../source/Duration.hpp"
@@ -6,14 +7,12 @@
 
 int main( int argc, const char* argv[] )
 {
-    CSP::Scenario scenario;
+    CSP::Timenode T1;
+    std::shared_ptr<operations_research::Solver> solver = std::make_shared<operations_research::Solver>("i-score time constraint Solver");
 
-        scenario.addConstraint(
-                    CSP::FiniteDuration{10},
-                    CSP::FiniteDuration{0},
-                    CSP::Duration{0});
+    operations_research::IntVar* T1_1;
+    T1_1 = T1.getDate(solver);
 
-        CSP::isValid(scenario);
-
-        return 0;
+    std::cout << "eq : " << (T1_1 == T1.getDate(solver));
+    return 0;
 }

@@ -7,18 +7,31 @@ namespace CSP
 {
 class Constraint;
 
+class Timenode;
+
+class IncorrectSolverException
+{
+public:
+    IncorrectSolverException(){};
+};
+
 class Node
 {
 private:
     std::vector<Constraint*> _nextConstraints;
+
+    virtual
+    operations_research::IntVar*
+    _makeDate(operations_research::Solver* solver);
+
 protected:
     operations_research::IntVar* _date;
+    std::weak_ptr<operations_research::Solver> _solver;
 public:
-    Node()
-        :_date(NULL){}
+    Node(){}
 
     void
-    applyConstraints(operations_research::Solver& solver);
+    applyConstraints(std::shared_ptr<operations_research::Solver> solver);
 
     void
     addNextConstraint(Constraint* nextConstraint);
@@ -26,11 +39,17 @@ public:
     bool
     removeNextConstraint(Constraint* constraintToRemove);
 
-    std::vector<Constraint*>
+    void
+    removeAllNextConstraints();
+
+    void
+    _removeConstraintsPointingTo(Timenode* timenode);
+
+    const std::vector<Constraint*>&
     getNextConstraints();
 
-    virtual operations_research::IntVar*
-    getDate(operations_research::Solver& solver);
+    operations_research::IntVar*
+    getDate(std::shared_ptr<operations_research::Solver> solver);
 
     virtual ~Node(){}
 };

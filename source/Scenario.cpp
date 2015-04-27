@@ -17,6 +17,15 @@ Scenario::_addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Dura
     return constraint;
 }
 
+void
+Scenario::_removeConstraintsPointingTo(Timenode* timenode)
+{
+    for(auto &node : _timenodes)
+    {
+        node->_removeConstraintsPointingTo(timenode);
+    }
+}
+
 Timenode*
 Scenario::addTimenode()
 {
@@ -57,16 +66,37 @@ Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Durat
     return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
 }
 
-void
+bool
 Scenario::removeConstraint(Constraint* constraintToRemove)
 {
     for(auto &node : _timenodes)
     {
         if(node->removeNextConstraint(constraintToRemove))
         {
-            break;
+            return true;
         }
     }
+    return false;
+}
+
+bool
+Scenario::removeTimenode(Timenode* timenodeToRemove)
+{
+    // first remove all constraints related to it
+    timenodeToRemove->removeAllNextConstraints();
+    this->_removeConstraintsPointingTo(timenodeToRemove);
+
+    // remove timenode from the vector and delete it
+    std::vector<Node*>::iterator NodePosition = find (_timenodes.begin(), _timenodes.end(), timenodeToRemove);
+    if (NodePosition != _timenodes.end())
+    {
+        _timenodes.erase(NodePosition);
+        delete timenodeToRemove;
+
+        return true;
+    }
+
+    return false;
 }
 
 }

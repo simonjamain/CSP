@@ -24,6 +24,9 @@ private:
     Constraint*
     _addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode);
 
+    void
+    _removeConstraintsPointingTo(Timenode* timenode);
+
 public:
     Scenario()
         :_start(new Start())
@@ -46,14 +49,23 @@ public:
     Constraint*
     addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode);
 
-    void
-    removeConstraint(Constraint* constraint);//TODO: throw ex if constraint not found?
+    bool
+    removeConstraint(Constraint* constraintToRemove);//TODO: throw ex if constraint not found?
 
-    const std::vector<Node*>
+    bool
+    removeTimenode(Timenode* timenodeToRemove);//TODO: throw ex if timenode not found?
+
+    std::vector<Node*>
     getTimenodes() const
     {
         return _timenodes;
     };
+
+    Node*
+    getStartNode()
+    {
+        return _start;
+    }
 };
 }
 #endif /* SCENARIO_HPP_ */

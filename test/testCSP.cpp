@@ -36,15 +36,15 @@ TEST(csp, validA2)
 
 TEST(csp, validA3)
 {
-    CSP::Scenario scenariA3;
+    CSP::Scenario scenarioA3;
 
-    scenariA3.addConstraint(
+    scenarioA3.addConstraint(
                 FDUR_10,
                 FDUR_10,
                 DUR_INF
                 );
 
-    ASSERT_TRUE(CSP::isValid(scenariA3));
+    ASSERT_TRUE(CSP::isValid(scenarioA3));
 }
 
 TEST(csp, validC1)
