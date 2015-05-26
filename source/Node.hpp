@@ -30,6 +30,8 @@ protected:
 public:
     Node(){}
 
+    int64 date;
+
     void
     applyConstraints(std::shared_ptr<operations_research::Solver> solver);
 

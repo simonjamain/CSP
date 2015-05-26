@@ -4,15 +4,49 @@
 #include "../source/Duration.hpp"
 #include "../source/Start.hpp"
 #include "../source/Timenode.hpp"
+#include "../test/testHelpers.hpp"
 
 int main( int argc, const char* argv[] )
 {
-    CSP::Timenode T1;
-    std::shared_ptr<operations_research::Solver> solver = std::make_shared<operations_research::Solver>("i-score time constraint Solver");
+    CSP::Scenario scenario;
 
-    operations_research::IntVar* T1_1;
-    T1_1 = T1.getDate(solver);
+    CSP::Constraint* c1 = scenario.addConstraint(
+                FDUR_10,
+                FDUR_5,
+                DUR_5
+                );
 
-    std::cout << "eq : " << (T1_1 == T1.getDate(solver));
+    CSP::Timenode* t1 = c1->getNextTimenode();
+
+    CSP::Constraint* c2 = scenario.addConstraint(
+                FDUR_10,
+                FDUR_5,
+                DUR_5,
+                t1
+                );
+
+    CSP::Timenode* t2 = c2->getNextTimenode();
+
+    CSP::Constraint* c3 = scenario.addConstraint(
+                FDUR_20,
+                FDUR_10,
+                DUR_0,
+                CSP::ConstraintAttachment::START,
+                t2
+                );
+
+    CSP::Constraint* c4 = scenario.addConstraint(
+                FDUR_10,
+                FDUR_5,
+                DUR_5,
+                t2
+                );
+
+    CSP::Timenode* t3 =  c4->getNextTimenode();
+
+
+    generateTikzCode(scenario, std::cout, "Debug");
+
+
     return 0;
 }

@@ -16,6 +16,6 @@ namespace CSP
     isValid(Scenario& scenario);
 
     void
-    generateTikzCode(Scenario& scenario, std::ostream& output);
+    generateTikzCode(Scenario& scenario, std::ostream& output, std::string figureName);
 }
 #endif /* CSP_HPP_ */
