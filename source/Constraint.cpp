@@ -29,6 +29,12 @@ Constraint::getMin() const
     return FiniteDuration(_nominal.getLength() - _flexBefore.getLength());
 }
 
+FiniteDuration
+Constraint::getNominal() const
+{
+    return FiniteDuration(_nominal.getLength());
+}
+
 Duration
 Constraint::getMax() const
 {
@@ -60,6 +66,12 @@ Constraint::applyConstraints(Node* prevTimenode, std::shared_ptr<operations_rese
     */
 
     operations_research::IntExpr* distance = solver->MakeDifference ( nextDate , prevDate );
+
+    //look only nominal duration
+    auto cNom = solver->MakeEquality( distance, int64( getNominal().getLength() ) );
+    solver->AddConstraint(cNom);
+
+
 #ifdef CSP_DEBUG_MODEL
     std::cout << "prevDate : " << prevDate->DebugString() << "\n";
     std::cout << "nextDate : " << nextDate->DebugString() << "\n";
@@ -77,6 +89,7 @@ Constraint::applyConstraints(Node* prevTimenode, std::shared_ptr<operations_rese
         std::cout << "C2 : " << c2->DebugString() << "\n---------------------------------\n";
 #endif
     }
+
 
 }
 }

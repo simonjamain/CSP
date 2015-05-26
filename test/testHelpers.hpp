@@ -13,4 +13,7 @@
 #define FDUR_15 CSP::FiniteDuration{15}
 #define DUR_15 CSP::Duration{15}
 
+#define FDUR_20 CSP::FiniteDuration{20}
+#define DUR_20 CSP::Duration{20}
+
 #define DUR_INF CSP::Duration{CSP::PositiveInfinity{}}

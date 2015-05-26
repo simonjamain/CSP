@@ -3,6 +3,7 @@
 
 #include <constraint_solver/constraint_solver.h>
 #include "../source/Scenario.hpp"
+#include <iostream>
 
 namespace CSP
 {
@@ -13,5 +14,8 @@ namespace CSP
      */
     bool
     isValid(Scenario& scenario);
+
+    void
+    generateTikzCode(Scenario& scenario, std::ostream& output);
 }
 #endif /* CSP_HPP_ */

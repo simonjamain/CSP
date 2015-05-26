@@ -42,6 +42,9 @@ public:
     FiniteDuration
     getMin() const throw (InternalPropertiesNotValidException);
 
+    FiniteDuration
+    getNominal() const throw (InternalPropertiesNotValidException);
+
     Duration
     getMax() const throw (InternalPropertiesNotValidException);
 

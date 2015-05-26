@@ -1,6 +1,7 @@
 #include "csp.hpp"
 #include <constraint_solver/constraint_solver.h>
 #include "Constraint.hpp"
+#include <iostream>
 
 namespace CSP
 {
@@ -51,5 +52,11 @@ isValid(Scenario& scenario)
 
     solver->EndSearch();
     return valid;
+}
+
+void
+generateTikzCode(Scenario& scenario, std::ostream& output)
+{
+
 }
 }

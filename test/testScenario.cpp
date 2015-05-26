@@ -52,9 +52,9 @@ TEST(scenario, timenodeRemoval)
     CSP::Timenode* t2 = c2->getNextTimenode();
 
     CSP::Constraint* c3 = scenario.addConstraint(
-                FDUR_10,
-                FDUR_10,
-                DUR_10,
+                FDUR_20,
+                FDUR_20,
+                DUR_0,
                 CSP::ConstraintAttachment::START,
                 t2
                 );
