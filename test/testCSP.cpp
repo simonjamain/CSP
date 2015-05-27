@@ -7,6 +7,11 @@
 #include "../source/Scenario.hpp"
 #include "../source/csp.hpp"
 #include "testHelpers.hpp"
+#include <fstream>
+
+#ifdef CSP_GENERATE_GRAPHICS
+std::ofstream graphicsFile ("./graphics.tex");
+#endif /* CSP_GENERATE_GRAPHICS */
 
 TEST(csp, validA1)
 {
@@ -19,6 +24,10 @@ TEST(csp, validA1)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioA1));
+
+#ifdef CSP_GENERATE_GRAPHICS
+generateTikzCode(scenarioA1, graphicsFile, "validAun");
+#endif /* CSP_GENERATE_GRAPHICS */
 }
 
 TEST(csp, validA2)
@@ -32,6 +41,10 @@ TEST(csp, validA2)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioA2));
+
+#ifdef CSP_GENERATE_GRAPHICS
+generateTikzCode(scenarioA2, graphicsFile, "validAdeux");
+#endif /* CSP_GENERATE_GRAPHICS */
 }
 
 TEST(csp, validA3)
@@ -45,6 +58,10 @@ TEST(csp, validA3)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioA3));
+
+#ifdef CSP_GENERATE_GRAPHICS
+generateTikzCode(scenarioA3, graphicsFile, "validAtrois");
+#endif /* CSP_GENERATE_GRAPHICS */
 }
 
 TEST(csp, validC1)
@@ -66,6 +83,10 @@ TEST(csp, validC1)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioC1));
+
+#ifdef CSP_GENERATE_GRAPHICS
+generateTikzCode(scenarioC1, graphicsFile, "validCun");
+#endif /* CSP_GENERATE_GRAPHICS */
 }
 
 TEST(csp, validC2)
@@ -87,6 +108,10 @@ TEST(csp, validC2)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioC2));
+
+#ifdef CSP_GENERATE_GRAPHICS
+generateTikzCode(scenarioC2, graphicsFile, "validCdeux");
+#endif /* CSP_GENERATE_GRAPHICS */
 }
 
 TEST(csp, validD1)
@@ -107,6 +132,10 @@ TEST(csp, validD1)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioD1));
+
+#ifdef CSP_GENERATE_GRAPHICS
+generateTikzCode(scenarioD1, graphicsFile, "validDun");
+#endif /* CSP_GENERATE_GRAPHICS */
 }
 
 TEST(csp, validD2)
@@ -127,6 +156,10 @@ TEST(csp, validD2)
                 );
 
     ASSERT_TRUE(CSP::isValid(scenarioD2));
+
+#ifdef CSP_GENERATE_GRAPHICS
+generateTikzCode(scenarioD2, graphicsFile, "validDdeux");
+#endif /* CSP_GENERATE_GRAPHICS */
 }
 
 TEST(csp, invalidA1)

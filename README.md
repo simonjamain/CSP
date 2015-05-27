@@ -53,6 +53,11 @@ De plus, vous pouvez afficher sur la sortie standard les valeurs retournés par 
 -DCSP_LOG_VALUES=ON -DCSP_DEBUG_MODEL=ON
 ```
 
+Vous pouvez également générer des figure Tikz correspondant aux tests pour les in lure dans du code latex via l'option suivante :
+```cmake
+-DCSP_GENERATE_GRAPHICS=ON
+```
+
 ## Known bugs
 The linker of produced executables on osx can point to the wrong location : use otool to change it to the good or tool location
 run : install_name_tool -change "/Users/lperron/Work/or-tools/lib/libortools.dylib" "/Users/doctorant/Desktop/lib/or-tools.MacOsX64/lib/libortools.dylib" runTests

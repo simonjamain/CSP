@@ -5,6 +5,7 @@
 #include "../source/Start.hpp"
 #include "../source/Timenode.hpp"
 #include "../test/testHelpers.hpp"
+#include <fstream>
 
 int main( int argc, const char* argv[] )
 {
@@ -46,6 +47,7 @@ int main( int argc, const char* argv[] )
 
 
     generateTikzCode(scenario, std::cout, "Debug");
+    //generateTikzCode(scenario, CSP::graphicsFile, "Debug");
 
 
     return 0;

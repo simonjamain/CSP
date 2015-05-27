@@ -87,7 +87,7 @@ if(${CSP_LOG_VALUES})
   message(STATUS "Debogage des valeures des dates actif.")
 endif()
 
-option(CSP_DEBUG_MODEL "Log dates found by solver"
+option(CSP_DEBUG_MODEL "Log some debug values"
        OFF)
 
 if(${CSP_DEBUG_MODEL})
@@ -95,3 +95,10 @@ if(${CSP_DEBUG_MODEL})
   message(STATUS "Debogage du modele actif.")
 endif()
 
+option(CSP_GENERATE_GRAPHICS "Generate graphics of the tests scenarios"
+       OFF)
+
+if(${CSP_GENERATE_GRAPHICS})
+  add_definitions(-DCSP_GENERATE_GRAPHICS)
+  message(STATUS "Generation de shemas.")
+endif()

@@ -1,3 +1,6 @@
+#ifndef CSP_TESTHELPER_HPP_
+#define CSP_TESTHELPER_HPP_
+
 #include "../source/Duration.hpp"
 #include "../source/FiniteDuration.hpp"
 
@@ -17,3 +20,5 @@
 #define DUR_20 CSP::Duration{20}
 
 #define DUR_INF CSP::Duration{CSP::PositiveInfinity{}}
+
+#endif /* CSP_TESTHELPER_HPP_ */
