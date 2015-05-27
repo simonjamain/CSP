@@ -8,6 +8,7 @@ lib/
 *.autosave
 *.user
 *.txt.user
+*.DS_Store
 
 #standard c++
 # Compiled Object files
