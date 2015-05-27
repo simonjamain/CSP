@@ -62,18 +62,47 @@ generateTikzCode(Scenario& scenario, std::ostream& output, std::string figureNam
     if(isValid(scenario))
     {
         output << "\\def\\schemaScenario" << figureName << "{%\n";
-        output << "\\begin{tikzpicture}[scale=0.3]%\n";
+        output << "\\begin{tikzpicture}[scale=0.1]%\n";
 
 
         const std::vector<Node*> timenodes = scenario.getTimenodes();
 
         int Tcounter = 0;
         int Ccounter = 1;
+        int yPos = 0;
         std::string constraintName;
         std::string nodeName;
         int date;
         for(auto &node : timenodes)
         {
+            date = (int) node->date;
+
+            output << "\\def\\date{" << date << "};%\n";
+
+            for(auto &constraint : node->getNextConstraints())
+            {
+                constraintName = "C"+std::to_string(Ccounter);
+
+                yPos = -2*Ccounter;
+
+                output << "\\def\\contraintName{" << constraintName << "};%\n";
+                output << "\\def\\ypos{" << yPos << "};%\n";
+                output << "\\def\\min{" << constraint->getMin().getLength() << "};%\n";
+                output << "\\def\\nom{" << constraint->getNominal().getLength() << "};%\n";
+                if(constraint->getMax().isFinite())
+                {output << "\\def\\max{" << constraint->getMax().getLength() << "};%\n";}
+                else
+                {output << "\\def\\max{" << constraint->getNominal().getLength()+1 << "};%\n";}
+                output << "\\fill (\\date,\\ypos) circle (0.3);%\n";
+                output << "\\fill (\\date+\\nom,\\ypos) circle (0.3);%\n";
+                output << "\\draw (\\date,\\ypos) -- ++(\\min,0) node[midway,above,scale=0.25] {\\contraintName};%\n";
+                output << "\\draw (\\date+\\min,\\ypos+0.5) -- ++(0,-1);%\n";
+                output << "\\draw[densely dotted] (\\date+\\min,\\ypos) -- (\\date+\\max,\\ypos);%\n";
+                if(constraint->getMax().isFinite())
+                {output << "\\draw (\\date+\\max,\\ypos+0.5) -- ++(0,-1);%\n%\n";}
+                Ccounter++;
+            }
+
             if(Tcounter == 0)
             {
                 nodeName = "START";
@@ -82,36 +111,10 @@ generateTikzCode(Scenario& scenario, std::ostream& output, std::string figureNam
                 nodeName = "\\Huge T"+std::to_string(Tcounter);
             }
 
-            date = (int) node->date;
-
-            output << "\\def\\date{" << date << "};%\n";
             output << "\\def\\nodeName{" << nodeName << "};%\n";
-            output << "\\draw (\\date,0) -- ++(-2,1) -- ++(0,4) -- ++(4,0) -- ++(0,-4) -- ++(-2,-1) -- ++(0,-10);%\n";
-            output << "\\draw (\\date,3) node{\\nodeName};%\n";
-
-            for(auto &constraint : node->getNextConstraints())
-            {
-                constraintName = "C"+std::to_string(Ccounter);
-
-                int yPos = -2*Ccounter;
-
-                output << "\\def\\contraintName{" << constraintName << "}";
-                output << "\\def\\ypos{" << yPos << "};%\n";
-                output << "\\def\\min{" << constraint->getMin().getLength() << "};%\n";
-                output << "\\def\\nom{" << constraint->getNominal().getLength() << "};%\n";
-                if(constraint->getMax().isFinite())
-                {output << "\\def\\max{" << constraint->getMax().getLength() << "};%\n";}
-                else
-                {output << "\\def\\max{" << constraint->getNominal().getLength()+1 << "};%\n";}
-                output << "\\fill (\\date,\\ypos) circle (0.5);%\n";
-                output << "\\fill (\\date+\\nom,\\ypos) circle (0.5);%\n";
-                output << "\\draw (\\date,\\ypos) -- ++(\\min,0);%\n";
-                output << "\\draw (\\date+\\min,\\ypos+0.5) -- ++(0,-1) node[midway,above] {\\contraintName};%\n";
-                output << "\\draw[densely dotted] (\\date+\\min,\\ypos) -- (\\date+\\max,\\ypos);%\n";
-                if(constraint->getMax().isFinite())
-                {output << "\\draw (\\date+\\max,\\ypos+0.5) -- ++(0,-1);%\n";}
-                Ccounter++;
-            }
+            output << "\\def\\ypos{" << (yPos-2) << "};%\n";
+            output << "\\draw (\\date,0) -- ++(-1,0.5) -- ++(0,2) -- ++(2,0) -- ++(0,-2) -- ++(-1,-0.5) -- (\\date, \\ypos);%\n";
+            output << "\\draw (\\date,1.5) node[scale=0.17]{\\nodeName};%\n%\n";
 
             Tcounter++;
         }
