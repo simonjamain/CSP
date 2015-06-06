@@ -13,7 +13,7 @@ TEST(scenario, constraintRemoval)
 {
     CSP::Scenario scenario;
 
-    CSP::Constraint* c1 = scenario.addConstraint(
+    CSP::TimeRelation* c1 = scenario.addTimeRelation(
                 FDUR_0,
                 FDUR_0,
                 DUR_0
@@ -22,19 +22,19 @@ TEST(scenario, constraintRemoval)
     CSP::Node* t1 = c1->getNextTimenode();
 
     ASSERT_EQ(scenario.getTimenodes().size(),2);
-    ASSERT_EQ(scenario.getTimenodes()[0]->getNextConstraints().size(),1);
+    ASSERT_EQ(scenario.getTimenodes()[0]->getNextTimeRelations().size(),1);
 
-    scenario.removeConstraint(c1);
+    scenario.removeTimeRelation(c1);
 
     ASSERT_EQ(scenario.getTimenodes().size(),2);
-    ASSERT_TRUE(scenario.getTimenodes()[0]->getNextConstraints().empty());
+    ASSERT_TRUE(scenario.getTimenodes()[0]->getNextTimeRelations().empty());
 }
 
 TEST(scenario, timenodeRemoval)
 {
     CSP::Scenario scenario;
 
-    CSP::Constraint* c1 = scenario.addConstraint(
+    CSP::TimeRelation* c1 = scenario.addTimeRelation(
                 FDUR_10,
                 FDUR_5,
                 DUR_5
@@ -42,7 +42,7 @@ TEST(scenario, timenodeRemoval)
 
     CSP::Timenode* t1 = c1->getNextTimenode();
 
-    CSP::Constraint* c2 = scenario.addConstraint(
+    CSP::TimeRelation* c2 = scenario.addTimeRelation(
                 FDUR_10,
                 FDUR_5,
                 DUR_5,
@@ -51,7 +51,7 @@ TEST(scenario, timenodeRemoval)
 
     CSP::Timenode* t2 = c2->getNextTimenode();
 
-    CSP::Constraint* c3 = scenario.addConstraint(
+    CSP::TimeRelation* c3 = scenario.addTimeRelation(
                 FDUR_20,
                 FDUR_20,
                 DUR_0,
@@ -59,7 +59,7 @@ TEST(scenario, timenodeRemoval)
                 t2
                 );
 
-    CSP::Constraint* c4 = scenario.addConstraint(
+    CSP::TimeRelation* c4 = scenario.addTimeRelation(
                 FDUR_10,
                 FDUR_5,
                 DUR_5,
@@ -87,15 +87,15 @@ TEST(scenario, timenodeRemoval)
                        t3),
              timenodes.end());
 
-    auto afterStartConstraints = scenario.getStartNode()->getNextConstraints();
+    auto afterStartConstraints = scenario.getStartNode()->getNextTimeRelations();
 
     CHECK_EQ(std::find(afterStartConstraints.begin(),
                        afterStartConstraints.end(),
                        c3),
              afterStartConstraints.end());
 
-    CHECK_EQ(std::find(t1->getNextConstraints().begin(),
-                       t1->getNextConstraints().end(),
+    CHECK_EQ(std::find(t1->getNextTimeRelations().begin(),
+                       t1->getNextTimeRelations().end(),
                        c2),
-             t1->getNextConstraints().end());
+             t1->getNextTimeRelations().end());
 }

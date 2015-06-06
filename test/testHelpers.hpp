@@ -7,6 +7,9 @@
 #define FDUR_0 CSP::FiniteDuration{0}
 #define DUR_0 CSP::Duration{0}
 
+#define FDUR_3 CSP::FiniteDuration{3}
+#define DUR_3 CSP::Duration{3}
+
 #define FDUR_5 CSP::FiniteDuration{5}
 #define DUR_5 CSP::Duration{5}
 

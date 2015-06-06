@@ -13,42 +13,46 @@ int main( int argc, const char* argv[] )
 
     CSP::TimeRelation* c1 = scenario.addTimeRelation(
                 FDUR_10,
-                FDUR_5,
-                DUR_5
+                FDUR_0,
+                DUR_0
                 );
 
     CSP::Timenode* t1 = c1->getNextTimenode();
 
     CSP::TimeRelation* c2 = scenario.addTimeRelation(
                 FDUR_10,
-                FDUR_5,
-                DUR_5,
+                FDUR_3,
+                DUR_3,
+                CSP::ConstraintAttachment::START,
                 t1
                 );
 
-    CSP::Timenode* t2 = c2->getNextTimenode();
-
     CSP::TimeRelation* c3 = scenario.addTimeRelation(
-                FDUR_20,
                 FDUR_10,
-                DUR_0,
+                FDUR_3,
+                DUR_INF,
                 CSP::ConstraintAttachment::START,
-                t2
+                t1
                 );
 
     CSP::TimeRelation* c4 = scenario.addTimeRelation(
                 FDUR_10,
-                FDUR_5,
-                DUR_5,
-                t2
+                FDUR_10,
+                DUR_3,
+                CSP::ConstraintAttachment::START,
+                t1
                 );
 
-    CSP::Timenode* t3 =  c4->getNextTimenode();
+    CSP::TimeRelation* c5 = scenario.addTimeRelation(
+                FDUR_10,
+                FDUR_10,
+                DUR_INF,
+                CSP::ConstraintAttachment::START,
+                t1
+                );
 
 
-    generateTikzCode(scenario, std::cout, "Debug");
-    //generateTikzCode(scenario, CSP::graphicsFile, "Debug");
-
+    generateTikzCode(scenario, std::cout, "Presentation");
 
     return 0;
 }

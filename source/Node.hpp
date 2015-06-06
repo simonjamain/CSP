@@ -5,7 +5,7 @@
 
 namespace CSP
 {
-class Constraint;
+class TimeRelation;
 
 class Timenode;
 
@@ -18,7 +18,7 @@ public:
 class Node
 {
 private:
-    std::vector<Constraint*> _nextConstraints;
+    std::vector<TimeRelation*> _nextConstraints;
 
     virtual
     operations_research::IntVar*
@@ -36,19 +36,19 @@ public:
     applyConstraints(std::shared_ptr<operations_research::Solver> solver);
 
     void
-    addNextConstraint(Constraint* nextConstraint);
+    addNextTimeRelation(TimeRelation* nextConstraint);
 
     bool
-    removeNextConstraint(Constraint* constraintToRemove);
+    removeNextTimeRelation(TimeRelation* constraintToRemove);
 
     void
-    removeAllNextConstraints();
+    removeAllNextTimeRelations();
 
     void
-    _removeConstraintsPointingTo(Timenode* timenode);
+    _removeTimeRelationsPointingTo(Timenode* timenode);
 
-    const std::vector<Constraint*>&
-    getNextConstraints();
+    const std::vector<TimeRelation*>&
+    getNextTimeRelations();
 
     operations_research::IntVar*
     getDate(std::shared_ptr<operations_research::Solver> solver);

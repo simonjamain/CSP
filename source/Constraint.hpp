@@ -18,7 +18,7 @@ public:
     ~InternalPropertiesNotValidException(){}
 };
 
-class Constraint
+class TimeRelation
 {
 private:
     FiniteDuration _nominal;
@@ -27,7 +27,7 @@ private:
     Timenode* _nextTimenode;
 
 public:
-    Constraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* nextTimenode)
+    TimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* nextTimenode)
         :_nominal(nominal),_flexBefore(flexBefore),_flexAfter(flexAfter),_nextTimenode(nextTimenode){}
 
     void

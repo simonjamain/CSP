@@ -17,7 +17,7 @@ TEST(csp, validA1)
 {
     CSP::Scenario scenarioA1;
 
-    scenarioA1.addConstraint(
+    scenarioA1.addTimeRelation(
                 FDUR_0,
                 FDUR_0,
                 DUR_0
@@ -34,7 +34,7 @@ TEST(csp, validA2)
 {
     CSP::Scenario scenarioA2;
 
-    scenarioA2.addConstraint(
+    scenarioA2.addTimeRelation(
                 FDUR_10,
                 FDUR_10,
                 DUR_10
@@ -51,7 +51,7 @@ TEST(csp, validA3)
 {
     CSP::Scenario scenarioA3;
 
-    scenarioA3.addConstraint(
+    scenarioA3.addTimeRelation(
                 FDUR_10,
                 FDUR_10,
                 DUR_INF
@@ -68,13 +68,13 @@ TEST(csp, validC1)
 {
     CSP::Scenario scenarioC1;
 
-    CSP::Constraint* c1 = scenarioC1.addConstraint(
+    CSP::TimeRelation* c1 = scenarioC1.addTimeRelation(
                 FDUR_10,
                 FDUR_0,
                 DUR_5
                 );
 
-    scenarioC1.addConstraint(
+    scenarioC1.addTimeRelation(
                 FDUR_10,
                 FDUR_0,
                 DUR_10,
@@ -93,13 +93,13 @@ TEST(csp, validC2)
 {
     CSP::Scenario scenarioC2;
 
-    CSP::Constraint* c1 = scenarioC2.addConstraint(
+    CSP::TimeRelation* c1 = scenarioC2.addTimeRelation(
                 FDUR_10,
                 FDUR_0,
                 DUR_5
                 );
 
-    scenarioC2.addConstraint(
+    scenarioC2.addTimeRelation(
                 FDUR_10,
                 FDUR_0,
                 DUR_INF,
@@ -118,13 +118,13 @@ TEST(csp, validD1)
 {
     CSP::Scenario scenarioD1;
 
-    CSP::Constraint* c1 = scenarioD1.addConstraint(
+    CSP::TimeRelation* c1 = scenarioD1.addTimeRelation(
                 FDUR_10,
                 FDUR_5,
                 DUR_5
                 );
 
-    scenarioD1.addConstraint(
+    scenarioD1.addTimeRelation(
                 FDUR_10,
                 FDUR_10,
                 DUR_5,
@@ -142,13 +142,13 @@ TEST(csp, validD2)
 {
     CSP::Scenario scenarioD2;
 
-    CSP::Constraint* c1 = scenarioD2.addConstraint(
+    CSP::TimeRelation* c1 = scenarioD2.addTimeRelation(
                 FDUR_10,
                 FDUR_5,
                 DUR_5
                 );
 
-    scenarioD2.addConstraint(
+    scenarioD2.addTimeRelation(
                 FDUR_10,
                 FDUR_10,
                 DUR_INF,
@@ -166,7 +166,7 @@ TEST(csp, invalidA1)
 {
     CSP::Scenario scenarioA1;
 
-    CSP::Constraint* c1 = scenarioA1.addConstraint(
+    CSP::TimeRelation* c1 = scenarioA1.addTimeRelation(
                 FDUR_10,
                 FDUR_15,
                 DUR_0
@@ -179,13 +179,13 @@ TEST(csp, invalidC1)
 {
     CSP::Scenario scenarioC1;
 
-    CSP::Constraint* c1 = scenarioC1.addConstraint(
+    CSP::TimeRelation* c1 = scenarioC1.addTimeRelation(
                 FDUR_5,
                 FDUR_5,
                 DUR_0
                 );
 
-    scenarioC1.addConstraint(
+    scenarioC1.addTimeRelation(
                 FDUR_15,
                 FDUR_5,
                 DUR_10,

@@ -7,22 +7,22 @@
 #include "../source/FiniteDuration.hpp"
 namespace CSP
 {
-Constraint*
-Scenario::_addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode)
+TimeRelation*
+Scenario::_addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode)
 {
-    Constraint* constraint = new Constraint(nominal, flexBefore, flexAfter, nextTimenode);
+    TimeRelation* constraint = new TimeRelation(nominal, flexBefore, flexAfter, nextTimenode);
 
-    prevTimenode->addNextConstraint(constraint);
+    prevTimenode->addNextTimeRelation(constraint);
 
     return constraint;
 }
 
 void
-Scenario::_removeConstraintsPointingTo(Timenode* timenode)
+Scenario::_removeTimeRelationsPointingTo(Timenode* timenode)
 {
     for(auto &node : _timenodes)
     {
-        node->_removeConstraintsPointingTo(timenode);
+        node->_removeTimeRelationsPointingTo(timenode);
     }
 }
 
@@ -34,44 +34,44 @@ Scenario::addTimenode()
     return timenode;
 }
 
-Constraint*
-Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode)
+TimeRelation*
+Scenario::addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode)
 {
     switch(prevTimenode)
     {
     default:
     case START:
-        return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
+        return _addTimeRelation(nominal, flexBefore, flexAfter, _start, nextTimenode);
         break;
     }
 }
 
-Constraint*
-Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode)
+TimeRelation*
+Scenario::addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode)
 {
-    return _addConstraint(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
+    return _addTimeRelation(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
 }
 
-Constraint*
-Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode)
+TimeRelation*
+Scenario::addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode)
 {
     Timenode* nextTimenode = addTimenode();
-    return _addConstraint(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
+    return _addTimeRelation(nominal, flexBefore, flexAfter, prevTimenode, nextTimenode);
 }
 
-Constraint*
-Scenario::addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter)
+TimeRelation*
+Scenario::addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter)
 {
     Timenode* nextTimenode = addTimenode();
-    return _addConstraint(nominal, flexBefore, flexAfter, _start, nextTimenode);
+    return _addTimeRelation(nominal, flexBefore, flexAfter, _start, nextTimenode);
 }
 
 bool
-Scenario::removeConstraint(Constraint* constraintToRemove)
+Scenario::removeTimeRelation(TimeRelation* constraintToRemove)
 {
     for(auto &node : _timenodes)
     {
-        if(node->removeNextConstraint(constraintToRemove))
+        if(node->removeNextTimeRelation(constraintToRemove))
         {
             return true;
         }
@@ -83,8 +83,8 @@ bool
 Scenario::removeTimenode(Timenode* timenodeToRemove)
 {
     // first remove all constraints related to it
-    timenodeToRemove->removeAllNextConstraints();
-    this->_removeConstraintsPointingTo(timenodeToRemove);
+    timenodeToRemove->removeAllNextTimeRelations();
+    this->_removeTimeRelationsPointingTo(timenodeToRemove);
 
     // remove timenode from the vector and delete it
     std::vector<Node*>::iterator NodePosition = find (_timenodes.begin(), _timenodes.end(), timenodeToRemove);

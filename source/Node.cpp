@@ -15,15 +15,15 @@ Node::applyConstraints(std::shared_ptr<operations_research::Solver>solver)
 }
 
 void
-Node::addNextConstraint(Constraint* nextConstraint)
+Node::addNextTimeRelation(TimeRelation* nextConstraint)
 {
     _nextConstraints.push_back(nextConstraint);
 }
 
 bool
-Node::removeNextConstraint(Constraint* constraintToRemove)
+Node::removeNextTimeRelation(TimeRelation* constraintToRemove)
 {
-    std::vector<Constraint*>::iterator constraintPosition = find (_nextConstraints.begin(), _nextConstraints.end(), constraintToRemove);
+    std::vector<TimeRelation*>::iterator constraintPosition = find (_nextConstraints.begin(), _nextConstraints.end(), constraintToRemove);
     if (constraintPosition != _nextConstraints.end())
     {
         _nextConstraints.erase(constraintPosition);
@@ -35,7 +35,7 @@ Node::removeNextConstraint(Constraint* constraintToRemove)
 }
 
 void
-Node::removeAllNextConstraints()
+Node::removeAllNextTimeRelations()
 {
     for(auto &constraint : _nextConstraints)
     {
@@ -45,21 +45,21 @@ Node::removeAllNextConstraints()
 }
 
 void
-Node::_removeConstraintsPointingTo(Timenode* timenode)
+Node::_removeTimeRelationsPointingTo(Timenode* timenode)
 {
-    std::vector<Constraint*> tmpConstraints = _nextConstraints;
+    std::vector<TimeRelation*> tmpConstraints = _nextConstraints;
 
     for(auto &constraint : tmpConstraints)
     {
         if(constraint->getNextTimenode() == timenode)
         {
-            this->removeNextConstraint(constraint);
+            this->removeNextTimeRelation(constraint);
         }
     }
 }
 
-const std::vector<Constraint*>&
-Node::getNextConstraints()
+const std::vector<TimeRelation*>&
+Node::getNextTimeRelations()
 {
     return _nextConstraints;
 }

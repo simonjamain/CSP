@@ -21,11 +21,11 @@ private:
 
     std::vector<Node*> _timenodes;
 
-    Constraint*
-    _addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode);
+    TimeRelation*
+    _addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Node* prevTimenode, Timenode* nextTimenode);
 
     void
-    _removeConstraintsPointingTo(Timenode* timenode);
+    _removeTimeRelationsPointingTo(Timenode* timenode);
 
 public:
     Scenario()
@@ -37,20 +37,20 @@ public:
     Timenode*
     addTimenode();
 
-    Constraint*
-    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter);
+    TimeRelation*
+    addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter);
 
-    Constraint*
-    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode);
+    TimeRelation*
+    addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode);
 
-    Constraint*
-    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode);
+    TimeRelation*
+    addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, ConstraintAttachment prevTimenode, Timenode* nextTimenode);
 
-    Constraint*
-    addConstraint(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode);
+    TimeRelation*
+    addTimeRelation(FiniteDuration nominal, FiniteDuration flexBefore, Duration flexAfter, Timenode* prevTimenode, Timenode* nextTimenode);
 
     bool
-    removeConstraint(Constraint* constraintToRemove);//TODO: throw ex if constraint not found?
+    removeTimeRelation(TimeRelation* constraintToRemove);//TODO: throw ex if constraint not found?
 
     bool
     removeTimenode(Timenode* timenodeToRemove);//TODO: throw ex if timenode not found?

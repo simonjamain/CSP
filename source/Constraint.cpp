@@ -6,37 +6,37 @@
 namespace CSP
 {
 void
-Constraint::setNominal(FiniteDuration duration)
+TimeRelation::setNominal(FiniteDuration duration)
 {
     _nominal = duration;
 }
 
 void
-Constraint::setFlexBefore(FiniteDuration duration)
+TimeRelation::setFlexBefore(FiniteDuration duration)
 {
     _flexBefore = duration;
 }
 
 void
-Constraint::setFlexAfter(Duration duration)
+TimeRelation::setFlexAfter(Duration duration)
 {
     _flexAfter = duration;
 }
 
 FiniteDuration
-Constraint::getMin() const
+TimeRelation::getMin() const
 {
     return FiniteDuration(_nominal.getLength() - _flexBefore.getLength());
 }
 
 FiniteDuration
-Constraint::getNominal() const
+TimeRelation::getNominal() const
 {
     return FiniteDuration(_nominal.getLength());
 }
 
 Duration
-Constraint::getMax() const
+TimeRelation::getMax() const
 {
     if(_flexAfter.isFinite())
     {
@@ -48,13 +48,13 @@ Constraint::getMax() const
 }
 
 Timenode*
-Constraint::getNextTimenode()
+TimeRelation::getNextTimenode()
 {
     return _nextTimenode;
 }
 
 void
-Constraint::applyConstraints(Node* prevTimenode, std::shared_ptr<operations_research::Solver> solver)
+TimeRelation::applyConstraints(Node* prevTimenode, std::shared_ptr<operations_research::Solver> solver)
 {
     operations_research::IntVar* prevDate = prevTimenode->getDate(solver);
     operations_research::IntVar* nextDate = _nextTimenode->getDate(solver);

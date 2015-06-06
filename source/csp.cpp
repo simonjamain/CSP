@@ -79,7 +79,7 @@ generateTikzCode(Scenario& scenario, std::ostream& output, std::string figureNam
 
             output << "\\def\\date{" << date << "};%\n";
 
-            for(auto &constraint : node->getNextConstraints())
+            for(auto &constraint : node->getNextTimeRelations())
             {
                 constraintName = "C"+std::to_string(Ccounter);
 
