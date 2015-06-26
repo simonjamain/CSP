@@ -1,0 +1,1 @@
+just use cmake, the dependencies will be installed automatically.
