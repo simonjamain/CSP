@@ -5,19 +5,27 @@ using namespace rhea;
 
 int main( int argc, const char* argv[] )
 {
-    variable left, mid, right;
+    variable t1(0), t2(10), min1(5), max1(15), nom1(10);
     simplex_solver solver;
+    //solver.set_autosolve(false);
+
+    solver.add_stays({min1,max1}, strength::required());
+    solver.add_stays({t1,t2}, strength::medium());
 
     solver.add_constraints(
     {
-        mid == (left + right) / 2,
-        right == left + 10,
-        right <= 100,
-        left >= 0
+                    min1 >= 0,
+                    nom1 >= min1,
+                    max1 >= nom1,
+                    t2 == nom1 + t1/*,
+                    max1 >= t2 - t1,
+                    min1 <= t2 - t1*/
     });
-    solver.suggest(mid, 2);
 
-    std::cout << left << " " << mid << " " << right << std::endl;
+
+    solver.suggest(t2, 19);
+
+    std::cout << t1 << " " << min1 << " " << nom1 << " " << t2 << " " << max1 << std::endl;
     // Prints "0 5 10"
 
     return 0;
