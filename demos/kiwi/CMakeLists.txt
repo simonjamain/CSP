@@ -27,7 +27,6 @@ message(STATUS "compiler : ${CMAKE_CXX_COMPILER}")
 # Modules
 ##########################################################################
 find_package(Kiwi REQUIRED)
-
 ##########################################################################
 # This project products
 ##########################################################################
@@ -54,5 +53,6 @@ foreach( exampleFile ${EXAMPLES} )
 
     add_executable( ${exampleName} ${exampleFile} )
     # Link
+
     target_link_libraries( ${exampleName} kiwi )
 endforeach()
