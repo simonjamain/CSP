@@ -12,7 +12,7 @@ if(NOT (RHEA_INCLUDE_DIR AND RHEA_LIBRARY))
 
 	find_path(RHEA_INCLUDE_DIR NAMES simplex_solver.hpp PATHS ${CMAKE_CURRENT_SOURCE_DIR} PATH_SUFFIXES "lib/rhea/rhea/")
 	find_library (RHEA_LIBRARY NAMES rhea PATHS ${CMAKE_CURRENT_SOURCE_DIR} PATH_SUFFIXES "lib/rhea/build/rhea/")
-	
+
 	if(NOT (RHEA_INCLUDE_DIR AND RHEA_LIBRARY))
 		message(WARNING "installation failed!")
 	endif()
@@ -23,7 +23,8 @@ endif()
 if(NOT (RHEA_INCLUDE_DIR AND RHEA_LIBRARY))
 	message(WARNING "rhea not found!")
 else()
-	message(STATUS "rhea found, path : ${RHEA_INCLUDE_DIR}")
+	message(STATUS "rhea found, include path : ${RHEA_INCLUDE_DIR}")
+	message(STATUS "rhea found, bin path : ${RHEA_LIBRARY}")
 endif()
 
 
