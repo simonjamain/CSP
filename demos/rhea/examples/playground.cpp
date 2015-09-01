@@ -26,7 +26,6 @@ int main( int argc, const char* argv[] )
     solver.suggest(t2, 19);
 
     std::cout << t1 << " " << min1 << " " << nom1 << " " << t2 << " " << max1 << std::endl;
-    // Prints "0 5 10"
 
     return 0;
 }
