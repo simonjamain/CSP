@@ -2,7 +2,7 @@
 mkdir lib;
 cd lib;
 
-#installing google test --------------------------------------------------------------------
+#installing kiwi --------------------------------------------------------------------
 rm -rf kiwi/;
 
 git clone https://github.com/nucleic/kiwi.git kiwi;
