@@ -1,5 +1,5 @@
-#include <rhea/simplex_solver.hpp>
-#include <rhea/iostream.hpp>
+#include <simplex_solver.hpp>
+#include <iostream.hpp>
 
 using namespace rhea;
 
@@ -30,4 +30,3 @@ int main( int argc, const char* argv[] )
 
     return 0;
 }
-
